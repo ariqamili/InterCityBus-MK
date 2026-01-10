@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("InterCityBus_MK")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+caccca4f250212d8753d3d4e2a3128d7836b3361")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79649aa2d41ab9afb0494996db671caac6cda086")]
 [assembly: System.Reflection.AssemblyProductAttribute("InterCityBus_MK")]
 [assembly: System.Reflection.AssemblyTitleAttribute("InterCityBus_MK")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

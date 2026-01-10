@@ -1,13 +1,24 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using InterCityBus_MK.Data;
+using InterCityBus_MK.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InterCityBus_MK.Controllers
 {
+    //[Authorize]
     public class StationController : Controller
     {
+        private ApplicationDbContext _dbContext;
+
+        public StationController(ApplicationDbContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
         public ActionResult Index()
         {
-            return View();
+            var stations = _dbContext.Stations.ToList();
+            return View(stations);
         }
 
         public ActionResult Create()
@@ -15,58 +26,59 @@ namespace InterCityBus_MK.Controllers
             return View();
         }
 
-        // POST: StationController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Station station)
         {
             if (ModelState.IsValid)
             {
-                return View("Index");
+                _dbContext.Stations.Add(station);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return View();
+            return View(station);
         }
 
-        // GET: StationController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var station = _dbContext.Stations.Find(id);
+            if (station == null)
+            {
+                return NotFound();
+            }
+            return View(station);
         }
 
-        // POST: StationController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Station station)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                _dbContext.Stations.Update(station);
+                _dbContext.SaveChanges();
+                return RedirectToAction("Index");
             }
-            catch
-            {
-                return View();
-            }
+            return View(station);
         }
 
-        // GET: StationController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var station = _dbContext.Stations.Find(id);
+            if (station == null)
+            {
+                return NotFound();
+            }
+            return View(station);
         }
 
-        // POST: StationController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(Station station)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _dbContext.Stations.Remove(station);
+            _dbContext.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }
