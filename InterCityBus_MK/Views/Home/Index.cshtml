@@ -1,8 +1,355 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model InterCityBus_MK.ViewModels.TripSearchViewModel
+
+@{
+    ViewData["Title"] = "Find Your Bus - InterCity MK";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- Hero Search Section -->
+<div class="hero-section">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h1 class="display-4 fw-bold text-white mb-3">
+                Travel Across North Macedonia
+            </h1>
+            <p class="lead text-white-50">
+                Affordable and comfortable bus travel to your destination
+            </p>
+        </div>
+
+        <!-- Search Form Card -->
+        <div class="search-card">
+            <form asp-action="Index" method="post">
+                <div class="row g-3">
+                    <!-- From Station -->
+                    <div class="col-md-5">
+                        <label asp-for="FromStationId" class="form-label fw-semibold">
+                            <i class="bi bi-geo-alt-fill text-primary me-2"></i>From
+                        </label>
+                        <select asp-for="FromStationId" class="form-select form-select-lg">
+                            <option value="">Select departure station</option>
+                            @foreach (var cityGroup in Model.Stations.GroupBy(s => s.City).OrderBy(g => g.Key))
+                            {
+                                <optgroup label="@cityGroup.Key">
+                                    @foreach (var station in cityGroup.OrderBy(s => s.Name))
+                                    {
+                                        <option value="@station.Id">@station.Name</option>
+                                    }
+                                </optgroup>
+                            }
+                        </select>
+                        <span asp-validation-for="FromStationId" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Swap Button -->
+                    <div class="col-md-2 d-flex align-items-end justify-content-center">
+                        <button type="button" class="btn btn-outline-secondary mb-4" id="swapStations" title="Swap stations">
+                            <i class="bi bi-arrow-left-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- To Station -->
+                    <div class="col-md-5">
+                        <label asp-for="ToStationId" class="form-label fw-semibold">
+                            <i class="bi bi-pin-map-fill text-primary me-2"></i>To
+                        </label>
+                        <select asp-for="ToStationId" class="form-select form-select-lg">
+                            <option value="">Select destination station</option>
+                            @foreach (var cityGroup in Model.Stations.GroupBy(s => s.City).OrderBy(g => g.Key))
+                            {
+                                <optgroup label="@cityGroup.Key">
+                                    @foreach (var station in cityGroup.OrderBy(s => s.Name))
+                                    {
+                                        <option value="@station.Id">@station.Name</option>
+                                    }
+                                </optgroup>
+                            }
+                        </select>
+                        <span asp-validation-for="ToStationId" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Search Button -->
+                    <div class="col-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                            <i class="bi bi-search me-2"></i>Search Trips
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Display validation summary if needed -->
+                <div asp-validation-summary="ModelOnly" class="text-danger text-center mt-3"></div>
+            </form>
+        </div>
+    </div>
 </div>
+
+<!-- Results Section -->
+@if (Model.HasSearched)
+{
+    <div class="container my-5">
+        <!-- Search Summary -->
+        <div class="search-summary mb-4 p-4 bg-light rounded-3 shadow-sm">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    @{
+                        var fromStation = Model.Stations.FirstOrDefault(s => s.Id == Model.FromStationId);
+                        var toStation = Model.Stations.FirstOrDefault(s => s.Id == Model.ToStationId);
+                    }
+                    <h4 class="mb-2">
+                        <i class="bi bi-bus-front text-primary"></i>
+                        <strong>@fromStation?.Name</strong>
+                        <i class="bi bi-arrow-right mx-2 text-muted"></i>
+                        <strong>@toStation?.Name</strong>
+                    </h4>
+                    <p class="text-muted mb-0">
+                        <small>
+                            <i class="bi bi-geo"></i> @fromStation?.City
+                            <i class="bi bi-arrow-right mx-2"></i>
+                            <i class="bi bi-geo"></i> @toStation?.City
+                        </small>
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <span class="badge bg-primary fs-6">
+                        @Model.Results.Count @(Model.Results.Count == 1 ? "trip" : "trips") found
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trip Results -->
+        @if (Model.Results.Any())
+        {
+            <div class="results-container">
+                @foreach (var trip in Model.Results)
+                {
+                    <div class="card trip-card mb-3 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="row align-items-center">
+                                <!-- Company Name -->
+                                <div class="col-md-2 text-center mb-3 mb-md-0">
+                                    <div class="company-badge">
+                                        <i class="bi bi-bus-front-fill text-primary display-6"></i>
+                                        <h6 class="text-primary fw-bold mt-2 mb-0">@trip.CompanyName</h6>
+                                    </div>
+                                </div>
+
+                                <!-- Route & Time -->
+                                <div class="col-md-7 mb-3 mb-md-0">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <!-- Departure -->
+                                        <div class="text-center">
+                                            <div class="h3 mb-1 fw-bold">@trip.DepartureTime.ToString("HH:mm")</div>
+                                            <small class="text-muted">@trip.FromStationName</small>
+                                        </div>
+
+                                        <!-- Journey Duration -->
+                                        <div class="flex-grow-1 mx-3 position-relative">
+                                            <hr class="my-0 border-2" style="border-top: 2px dashed #dee2e6;">
+                                            @{
+                                                var duration = trip.ArrivalTime.ToTimeSpan() - trip.DepartureTime.ToTimeSpan();
+                                                var hours = (int)duration.TotalHours;
+                                                var minutes = duration.Minutes;
+                                            }
+                                            <div class="position-absolute top-50 start-50 translate-middle bg-white px-2">
+                                                <i class="bi bi-clock text-primary"></i>
+                                                <small class="text-muted">@hours h @minutes min</small>
+                                            </div>
+                                        </div>
+
+                                        <!-- Arrival -->
+                                        <div class="text-center">
+                                            <div class="h3 mb-1 fw-bold">@trip.ArrivalTime.ToString("HH:mm")</div>
+                                            <small class="text-muted">@trip.ToStationName</small>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Price & Action -->
+                                <div class="col-md-3 text-center">
+                                    <div class="h2 text-primary mb-2 fw-bold">
+                                        @trip.Price.ToString("N0") <small class="fs-6 text-muted">MKD</small>
+                                    </div>
+                                    <small class="text-muted d-block mb-3">per passenger</small>
+                                    <a href="#" class="btn btn-primary w-100 py-2">
+                                        View Details <i class="bi bi-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <!-- No Results Found -->
+            <div class="alert alert-warning text-center py-5 shadow-sm">
+                <i class="bi bi-exclamation-triangle display-1 text-warning mb-3"></i>
+                <h4 class="mb-3">No trips found</h4>
+                <p class="text-muted mb-4">
+                    We couldn't find any trips from <strong>@fromStation?.Name</strong>
+                    to <strong>@toStation?.Name</strong>.
+                </p>
+                <p class="text-muted">
+                    <i class="bi bi-lightbulb"></i> Try searching for a different route or check back later.
+                </p>
+            </div>
+        }
+    </div>
+}
+
+<!-- Features Section (only show when no search has been performed) -->
+@if (!Model.HasSearched)
+{
+    <div class="container my-5">
+        <div class="row text-center g-4">
+            <div class="col-md-4">
+                <div class="feature-card p-4">
+                    <i class="bi bi-lightning-charge-fill text-primary display-4 mb-3"></i>
+                    <h5 class="fw-bold">Fast Booking</h5>
+                    <p class="text-muted">Search and compare trips in seconds</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card p-4">
+                    <i class="bi bi-piggy-bank-fill text-primary display-4 mb-3"></i>
+                    <h5 class="fw-bold">Best Prices</h5>
+                    <p class="text-muted">Compare prices from all bus companies</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card p-4">
+                    <i class="bi bi-shield-check text-primary display-4 mb-3"></i>
+                    <h5 class="fw-bold">Reliable Service</h5>
+                    <p class="text-muted">Trusted companies and verified schedules</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+        // Swap stations functionality
+        document.getElementById('swapStations').addEventListener('click', function() {
+            const fromSelect = document.getElementById('FromStationId');
+            const toSelect = document.getElementById('ToStationId');
+
+            const temp = fromSelect.value;
+            fromSelect.value = toSelect.value;
+            toSelect.value = temp;
+        });
+    </script>
+}
+
+@section Styles {
+    <style>
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 50vh;
+            padding: 60px 0 80px 0;
+            margin-bottom: 40px;
+        }
+
+        /* Search Card */
+        .search-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .form-select-lg, .form-control-lg {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+        }
+
+        .form-select-lg:focus, .form-control-lg:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        #swapStations {
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            padding: 0;
+            transition: all 0.3s ease;
+        }
+
+        #swapStations:hover {
+            transform: rotate(180deg);
+            background-color: #f8f9fa;
+        }
+
+        /* Trip Cards */
+        .trip-card {
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .trip-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
+            border-color: #667eea;
+        }
+
+        .company-badge {
+            padding: 10px;
+        }
+
+        /* Search Summary */
+        .search-summary {
+            border-left: 4px solid #667eea;
+        }
+
+        /* Features */
+        .feature-card {
+            transition: all 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .feature-card:hover {
+            background-color: #f8f9fa;
+            transform: translateY(-4px);
+        }
+
+        /* Responsive */
+        /* media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 0 60px 0;
+            }
+
+            .search-card {
+                padding: 24px;
+            }
+
+            .display-4 {
+                font-size: 2rem;
+            }
+
+            #swapStations {
+                margin-bottom: 0 !important;
+            }
+        } */
+    </style>
+}

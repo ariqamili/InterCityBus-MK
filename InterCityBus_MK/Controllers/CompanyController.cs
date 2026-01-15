@@ -1,6 +1,7 @@
 ﻿using InterCityBus_MK.Data;
 using InterCityBus_MK.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace InterCityBus_MK.Controllers
 {
@@ -12,9 +13,9 @@ namespace InterCityBus_MK.Controllers
         {
             _dbContext = dbContext;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(CancellationToken ct)
         {
-            var companies = _dbContext.Companies.ToList();
+            var companies = await _dbContext.Companies.ToListAsync(ct);
             return View(companies);
         }
 
@@ -25,20 +26,20 @@ namespace InterCityBus_MK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Company company)
+        public async Task<IActionResult> Create(Company company)
         {
             if (ModelState.IsValid)
             {
                 _dbContext.Companies.Add(company);
-                _dbContext.SaveChanges();
-                return RedirectToAction("Index");
+                await _dbContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(company);
         }
 
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var company = _dbContext.Companies.Find(id);
+            var company = await _dbContext.Companies.FindAsync(id);
             if (company == null)
             {
                 return NotFound();
@@ -48,20 +49,20 @@ namespace InterCityBus_MK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Company company)
+        public async Task<IActionResult> Edit(Company company)
         {
             if (ModelState.IsValid)
             {
                 _dbContext.Companies.Update(company);
-                _dbContext.SaveChanges();
-                return RedirectToAction("Index");
+                await _dbContext.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             return View(company);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var company = _dbContext.Companies.Find(id);
+            var company = await _dbContext.Companies.FindAsync(id);
             if (company == null)
             {
                 return NotFound();
@@ -71,11 +72,11 @@ namespace InterCityBus_MK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Company company)
+        public async Task<IActionResult> Delete(Company company)
         {
             _dbContext.Companies.Remove(company);
-            _dbContext.SaveChanges();
-            return RedirectToAction("Index");
+            await _dbContext.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
     }
 }

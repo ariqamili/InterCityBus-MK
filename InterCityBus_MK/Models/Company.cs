@@ -1,11 +1,19 @@
-﻿namespace InterCityBus_MK.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace InterCityBus_MK.Models
 {
     public class Company
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string ContactEmail { get; set; }
 
-        public ICollection<Trip> Trips { get; set; }
+        [Required]
+        [StringLength (80)]
+        public string Name { get; set; }
+
+        [EmailAddress] 
+        [StringLength (40)]
+        public string? ContactEmail { get; set; }
+
+        public virtual ICollection<Trip>? Trips { get; set; }
     }
 }
