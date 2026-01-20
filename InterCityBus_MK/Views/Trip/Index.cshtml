@@ -1,0 +1,41 @@
+﻿@model IEnumerable<InterCityBus_MK.ViewModels.TripDisplayViewModel>
+
+@{
+    ViewData["Title"] = "Menaxhimi i Udhëtimeve";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>@ViewData["Title"]</h1>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="bi bi-plus-circle"></i> Shto Udhëtim të Ri
+    </a>
+</div>
+
+<table class="table table-hover shadow-sm border">
+    <thead class="table-dark">
+        <tr>
+            <th>Kompania</th>
+            <th>Nga - Tek</th>
+            <th>Nisja</th>
+            <th>Mbërritja</th>
+            <th>Çmimi</th>
+            <th class="text-center">Veprimet</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td><strong>@item.CompanyName</strong></td>
+                <td>@item.FromStationName <i class="bi bi-arrow-right mx-2"></i> @item.ToStationName</td>
+                <td>@item.DepartureTime.ToString("HH:mm")</td>
+                <td>@item.ArrivalTime.ToString("HH:mm")</td>
+                <td>@item.Price.ToString("C")</td>
+                <td class="text-center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

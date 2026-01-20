@@ -1,0 +1,30 @@
+﻿@model InterCityBus_MK.Models.Trip
+
+@{
+    ViewData["Title"] = "Fshi Udhëtimin";
+}
+
+<div class="container mt-5">
+    <div class="card border-danger mx-auto" style="max-width: 500px;">
+        <div class="card-header bg-danger text-white">
+            <h4 class="mb-0">A jeni i sigurt?</h4>
+        </div>
+        <div class="card-body">
+            <p>A jeni i sigurt që dëshironi të fshini këtë udhëtim?</p>
+            <dl class="row">
+                <dt class="col-sm-5">Nisja:</dt>
+                <dd class="col-sm-7">@Model.DepartureTime</dd>
+
+                <dt class="col-sm-5">Çmimi:</dt>
+                <dd class="col-sm-7">@Model.Price MKD</dd>
+            </dl>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+            <form asp-action="Delete">
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger">Po, Fshije</button>
+            </form>
+            <a asp-action="Index" class="btn btn-secondary">Jo, Kthehu</a>
+        </div>
+    </div>
+</div>
