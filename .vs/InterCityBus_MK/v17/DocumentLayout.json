@@ -3,8 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\models\\stop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\models\\stop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\models\\trip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\models\\trip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\models\\station.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\models\\station.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\viewmodels\\tripsearchviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\viewmodels\\tripsearchviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -15,16 +31,8 @@
       "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\controllers\\companycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\controllers\\companycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\models\\trip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\models\\trip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\controllers\\tripcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,18 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\viewmodels\\tripdisplayviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\viewmodels\\tripdisplayviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\viewmodels\\tripsearchviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\viewmodels\\tripsearchviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\models\\stop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\models\\stop.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\models\\station.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|solutionrelative:intercitybus_mk\\models\\station.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{941919A0-FB2C-40E5-88FF-56E66E1AE39E}|InterCityBus_MK\\InterCityBus_MK.csproj|c:\\users\\arian\\.net\\intercitybus_mk\\intercitybus_mk\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -175,58 +171,80 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "InterCityBus_MK\\Views\\Home\\Index.cshtml",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-15T00:30:38.846Z",
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "InterCityBus_MK\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAFkAAAAAAAAAAAAAAFoAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-13T21:44:59.598Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "TripDisplayViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
-              "RelativeToolTip": "InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Title": "StationController.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\StationController.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\Controllers\\StationController.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\StationController.cs",
+              "RelativeToolTip": "InterCityBus_MK\\Controllers\\StationController.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAAUwBcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-10T22:39:08.101Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T18:37:43.267Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "TripFormViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
-              "RelativeToolTip": "InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAswB8AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T21:37:31.899Z",
-              "EditorCaption": ""
+              "DocumentIndex": 6,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-01-10T20:17:26.684Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Data\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Data\\ApplicationDbContext.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Data\\ApplicationDbContext.cs",
-              "RelativeToolTip": "InterCityBus_MK\\Data\\ApplicationDbContext.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Title": "Stop.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Stop.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\Models\\Stop.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Stop.cs",
+              "RelativeToolTip": "InterCityBus_MK\\Models\\Stop.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAwBUAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T18:42:25.297Z",
+              "WhenOpened": "2026-01-09T16:55:19.386Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "Station.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Station.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\Models\\Station.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Station.cs",
+              "RelativeToolTip": "InterCityBus_MK\\Models\\Station.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-09T16:48:10.34Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Trip.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Trip.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\Models\\Trip.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Trip.cs",
+              "RelativeToolTip": "InterCityBus_MK\\Models\\Trip.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAADgvykAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-09T16:52:24.552Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "CompanyController.cs",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\CompanyController.cs",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Controllers\\CompanyController.cs",
@@ -239,46 +257,55 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "StationController.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\StationController.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Controllers\\StationController.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\StationController.cs",
-              "RelativeToolTip": "InterCityBus_MK\\Controllers\\StationController.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAUwBcAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "TripDisplayViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
+              "RelativeToolTip": "InterCityBus_MK\\ViewModels\\TripDisplayViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T18:37:43.267Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-10T22:39:08.101Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "InterCityBus_MK\\Controllers\\HomeController.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAADwvzcAAAANAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "TripSearchViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
+              "RelativeToolTip": "InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABYAAABaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T21:44:59.598Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-13T19:27:57.984Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "InterCityBus_MK\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-10T20:17:26.684Z",
-              "EditorCaption": ""
+              "DocumentIndex": 5,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "InterCityBus_MK\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAACkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-09T18:42:25.297Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
+              "Title": "TripFormViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
+              "RelativeDocumentMoniker": "InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
+              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
+              "RelativeToolTip": "InterCityBus_MK\\ViewModels\\TripFormViewModel.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAswB8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-11T21:37:31.899Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "TripController.cs",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Controllers\\TripController.cs",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Controllers\\TripController.cs",
@@ -286,64 +313,11 @@
               "RelativeToolTip": "InterCityBus_MK\\Controllers\\TripController.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAYwIMAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-11T21:39:12.595Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Trip.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Trip.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Models\\Trip.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Trip.cs",
-              "RelativeToolTip": "InterCityBus_MK\\Models\\Trip.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAYwB8AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:52:24.552Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "TripSearchViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
-              "RelativeToolTip": "InterCityBus_MK\\ViewModels\\TripSearchViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAABaAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-13T19:27:57.984Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Stop.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Stop.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Models\\Stop.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Stop.cs",
-              "RelativeToolTip": "InterCityBus_MK\\Models\\Stop.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBoAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:55:19.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-11T21:39:12.595Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 12,
-              "Title": "Station.cs",
-              "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Station.cs",
-              "RelativeDocumentMoniker": "InterCityBus_MK\\Models\\Station.cs",
-              "ToolTip": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Station.cs",
-              "RelativeToolTip": "InterCityBus_MK\\Models\\Station.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:48:10.34Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "Company.cs",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Models\\Company.cs",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Models\\Company.cs",
@@ -351,12 +325,11 @@
               "RelativeToolTip": "InterCityBus_MK\\Models\\Company.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-09T16:51:30.319Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-09T16:51:30.319Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Station\\Create.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Station\\Create.cshtml",
@@ -368,7 +341,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Company\\Create.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Company\\Create.cshtml",
@@ -380,7 +353,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Company\\Edit.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Company\\Edit.cshtml",
@@ -392,7 +365,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Company\\Details.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Company\\Details.cshtml",
@@ -404,7 +377,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Station\\Delete.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Station\\Delete.cshtml",
@@ -416,7 +389,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Company\\Index.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Company\\Index.cshtml",
@@ -424,12 +397,11 @@
               "RelativeToolTip": "InterCityBus_MK\\Views\\Company\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-01-10T22:04:06.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-10T22:04:06.146Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Station\\Edit.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Station\\Edit.cshtml",
@@ -441,7 +413,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Station\\Index.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Station\\Index.cshtml",
@@ -453,7 +425,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Station\\Details.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Station\\Details.cshtml",
@@ -465,7 +437,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Views\\Company\\Delete.cshtml",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Views\\Company\\Delete.cshtml",
@@ -477,7 +449,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "InterCityBus_MK.csproj",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\InterCityBus_MK.csproj",
               "RelativeDocumentMoniker": "InterCityBus_MK\\InterCityBus_MK.csproj",
@@ -489,7 +461,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 25,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\appsettings.json",
               "RelativeDocumentMoniker": "InterCityBus_MK\\appsettings.json",
@@ -501,7 +473,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 24,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Arian\\.NET\\InterCityBus_MK\\InterCityBus_MK\\Program.cs",
               "RelativeDocumentMoniker": "InterCityBus_MK\\Program.cs",

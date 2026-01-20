@@ -1,9 +1,11 @@
 using System.Diagnostics;
+using System.Linq.Expressions;
 using InterCityBus_MK.Data;
 using InterCityBus_MK.Models;
 using InterCityBus_MK.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Versioning;
 
 namespace InterCityBus_MK.Controllers
 {
@@ -32,27 +34,21 @@ namespace InterCityBus_MK.Controllers
             await PopulateStations(viewModel);
             if (ModelState.IsValid)
             {
-                viewModel.Results = await _dbContext.Trips
-                    .Where(t => t.FromStationId == viewModel.FromStationId && t.ToStationId == viewModel.ToStationId)
-                    .OrderBy(t => t.DepartureTime)
-                    .Select(
-                    trip => new TripDisplayViewModel
-                    {
-                        Id = trip.Id,
-                        CompanyName = trip.Company.Name,
-                        FromStationName = trip.FromStation.Name,
-                        ToStationName = trip.ToStation.Name,
-                        DepartureTime = trip.DepartureTime,
-                        ArrivalTime = trip.ArrivalTime,
-                        Price = trip.Price
-                    }).ToListAsync();
-                viewModel.HasSearched = true;
-
-                if (viewModel.Results.Count == 0)
+                var dateToday = DateOnly.FromDateTime(DateTime.Now);
+                var timeNow = TimeOnly.FromDateTime(DateTime.Now);
+                if (viewModel.TravelDate == dateToday || viewModel.TravelDate == null)
                 {
-                    ModelState.AddModelError(string.Empty, "No trips found for the selected criteria.");
+                    await TripSearch(viewModel, trip =>
+                        trip.DepartureTime >= timeNow);
                 }
-                return View(viewModel);
+                else if (viewModel.TravelDate > dateToday)
+                {
+                    await TripSearch(viewModel, trip => true);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Travel date cannot be in the past.");
+                }
             }
             return View(viewModel);
         }
@@ -74,6 +70,49 @@ namespace InterCityBus_MK.Controllers
                 .OrderBy(s => s.City)
                 .ThenBy(s => s.Name)
                 .ToListAsync();
+        }
+
+        private async Task TripSearch(TripSearchViewModel viewModel, Expression<Func<Trip, bool>> timeComparison)
+        {
+            var matchingTripIds = await _dbContext.Stops.Where(s => s.StationId == viewModel.FromStationId)
+                .Join(_dbContext.Stops.Where(s => s.StationId == viewModel.ToStationId), 
+                fromStop => fromStop.TripId,
+                toStop => toStop.TripId,
+                (fromStop, toStop) => new
+                {
+                    tripId = fromStop.TripId,
+                    fromStopOrder = fromStop.StopOrder,
+                    toStopOrder = toStop.StopOrder,
+                    fromStopArrivalTime = fromStop.ArrivalTime,
+                    toStopArrivalTime = toStop.ArrivalTime
+                }
+                )
+                .Where(stops => stops.fromStopOrder < stops.toStopOrder)
+                .Select(tripIds => tripIds.tripId)
+                .Distinct()
+                .ToListAsync();
+
+            viewModel.Results = await _dbContext.Trips
+                        .Where(trip => matchingTripIds.Contains(trip.Id))
+                        .Where(timeComparison)
+                        .OrderBy(t => t.DepartureTime)
+                        .Select(
+                        trip => new TripDisplayViewModel
+                        {
+                            Id = trip.Id,
+                            CompanyName = trip.Company.Name,
+                            FromStationName = trip.FromStation.Name,
+                            ToStationName = trip.ToStation.Name,
+                            DepartureTime = trip.DepartureTime,
+                            ArrivalTime = trip.ArrivalTime,
+                            Price = trip.Price
+                        }).ToListAsync();
+            viewModel.HasSearched = true;
+
+            if (viewModel.Results.Count == 0)
+            {
+                ModelState.AddModelError(string.Empty, "No trips found for the selected criteria.");
+            }
         }
     }
 }
