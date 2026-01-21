@@ -74,39 +74,52 @@ namespace InterCityBus_MK.Controllers
 
         private async Task TripSearch(TripSearchViewModel viewModel, Expression<Func<Trip, bool>> timeComparison)
         {
-            var matchingTripIds = await _dbContext.Stops.Where(s => s.StationId == viewModel.FromStationId)
+            var matchingTrips = await _dbContext.Stops.Where(s => s.StationId == viewModel.FromStationId)
                 .Join(_dbContext.Stops.Where(s => s.StationId == viewModel.ToStationId), 
                 fromStop => fromStop.TripId,
                 toStop => toStop.TripId,
                 (fromStop, toStop) => new
                 {
-                    tripId = fromStop.TripId,
-                    fromStopOrder = fromStop.StopOrder,
-                    toStopOrder = toStop.StopOrder,
-                    fromStopArrivalTime = fromStop.ArrivalTime,
-                    toStopArrivalTime = toStop.ArrivalTime
+                    TripId = fromStop.TripId,
+                    FromStopOrder = fromStop.StopOrder,
+                    ToStopOrder = toStop.StopOrder,
+                    DepartureTime = fromStop.ArrivalTime,
+                    ArrivalTime = toStop.ArrivalTime,
+                    FromStationName = fromStop.Station.Name,
+                    ToStationName = toStop.Station.Name
                 }
                 )
-                .Where(stops => stops.fromStopOrder < stops.toStopOrder)
-                .Select(tripIds => tripIds.tripId)
-                .Distinct()
+                .Where(stops => stops.FromStopOrder < stops.ToStopOrder)
                 .ToListAsync();
 
-            viewModel.Results = await _dbContext.Trips
-                        .Where(trip => matchingTripIds.Contains(trip.Id))
+            var tripIds = matchingTrips.Select(t => t.TripId)
+                .Distinct()
+                .ToList();
+
+            var trips = await _dbContext.Trips
+                        .Include(t => t.Company)
+                        .Where(trip => tripIds.Contains(trip.Id))
                         .Where(timeComparison)
+                        .ToListAsync();
+
+            viewModel.Results = trips
+                        .Join(matchingTrips,
+                            trip => trip.Id,
+                            times => times.TripId,
+                            (trip, times) => new TripDisplayViewModel
+                            {
+                                Id = trip.Id,
+                                CompanyName = trip.Company.Name,
+                                FromStationName = times.FromStationName,
+                                ToStationName = times.ToStationName,
+                                DepartureTime = times.DepartureTime,
+                                ArrivalTime = times.ArrivalTime,
+                                Price = trip.Price
+                            }
+                        )
                         .OrderBy(t => t.DepartureTime)
-                        .Select(
-                        trip => new TripDisplayViewModel
-                        {
-                            Id = trip.Id,
-                            CompanyName = trip.Company.Name,
-                            FromStationName = trip.FromStation.Name,
-                            ToStationName = trip.ToStation.Name,
-                            DepartureTime = trip.DepartureTime,
-                            ArrivalTime = trip.ArrivalTime,
-                            Price = trip.Price
-                        }).ToListAsync();
+                        .ToList();
+
             viewModel.HasSearched = true;
 
             if (viewModel.Results.Count == 0)
