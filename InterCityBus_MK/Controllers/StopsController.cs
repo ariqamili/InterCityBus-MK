@@ -21,10 +21,7 @@ namespace InterCityBus_MK.Controllers
         public async Task<ActionResult> Index(CancellationToken ct)
         {
             // We use Include to fetch the related data for display
-            var stops = await _dbContext.Stops
-                .Include(s => s.Station)
-                .Include(s => s.Trip)
-                .ToListAsync(ct);
+            var stops = await _dbContext.Stops.ToListAsync(ct);
 
             return View(stops);
         }
