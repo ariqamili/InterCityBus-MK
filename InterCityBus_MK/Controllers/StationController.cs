@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InterCityBus_MK.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class StationController : Controller
     {
         private ApplicationDbContext _dbContext;

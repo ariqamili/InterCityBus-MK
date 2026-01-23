@@ -18,7 +18,6 @@ namespace InterCityBus_MK.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            // Fix the cascade delete issue
             modelBuilder.Entity<Trip>()
                 .HasOne(t => t.FromStation)
                 .WithMany()

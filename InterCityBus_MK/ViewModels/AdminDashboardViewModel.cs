@@ -1,4 +1,4 @@
-﻿namespace InterCityBus_MK.Models // or .ViewModels
+﻿namespace InterCityBus_MK.ViewModels
 {
     public class AdminDashboardViewModel
     {
@@ -7,6 +7,5 @@
         public int TotalTrips { get; set; }
         public int TotalCompanies { get; set; }
 
-        // We can add "Latest Activity" or "Recent Trips" here later
     }
 }

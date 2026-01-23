@@ -107,6 +107,39 @@ namespace InterCityBus_MK.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var trip = await _dbContext.Trips
+            .Include(t => t.Company)
+            .Include(t => t.FromStation)
+            .Include(t => t.ToStation)
+            .Include(t => t.Stops).ThenInclude(s => s.Station)
+            .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (trip == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new TripDisplayViewModel
+            {
+                Id = trip.Id,
+                CompanyName = trip.Company.Name,
+                FromStationName = trip.FromStation.Name,
+                ToStationName = trip.ToStation.Name,
+                DepartureTime = trip.DepartureTime,
+                ArrivalTime = trip.ArrivalTime,
+                Price = trip.Price,
+                AllStops = trip.Stops.OrderBy(s => s.StopOrder).Select(s => new StopDisplayViewModel
+                {
+                    StationName = s.Station.Name,
+                    ArrivalTime = s.ArrivalTime,
+                    StopOrder = s.StopOrder
+                }).ToList()
+            };
+            return View(viewModel);
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             var trip = await _dbContext.Trips.FindAsync(id);

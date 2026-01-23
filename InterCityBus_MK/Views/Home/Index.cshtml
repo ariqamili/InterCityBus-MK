@@ -147,6 +147,10 @@
                                             <hr class="my-0 border-2" style="border-top: 2px dashed #dee2e6;">
                                             @{
                                                 var duration = trip.ArrivalTime.ToTimeSpan() - trip.DepartureTime.ToTimeSpan();
+                                                @if (duration < TimeSpan.Zero)
+                                                {
+                                                    duration = duration.Add(TimeSpan.FromHours(24));
+                                                }
                                                 var hours = (int)duration.TotalHours;
                                                 var minutes = duration.Minutes;
                                             }
@@ -170,7 +174,7 @@
                                         @trip.Price.ToString("N0") <small class="fs-6 text-muted">MKD</small>
                                     </div>
                                     <small class="text-muted d-block mb-3">per passenger</small>
-                                    <a href="#" class="btn btn-primary w-100 py-2">
+                                    <a asp-controller="Trip" asp-action="Details" asp-route-id="@trip.Id" class="btn btn-primary w-100 py-2">
                                         View Details <i class="bi bi-arrow-right"></i>
                                     </a>
                                 </div>

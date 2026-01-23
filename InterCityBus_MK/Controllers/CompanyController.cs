@@ -1,10 +1,12 @@
 ﻿using InterCityBus_MK.Data;
 using InterCityBus_MK.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace InterCityBus_MK.Controllers
 {
+    [Authorize]
     public class CompanyController : Controller
     {
         private ApplicationDbContext _dbContext;

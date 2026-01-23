@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
 using InterCityBus_MK.Data;
 using InterCityBus_MK.Models;
@@ -36,18 +37,18 @@ namespace InterCityBus_MK.Controllers
             {
                 var dateToday = DateOnly.FromDateTime(DateTime.Now);
                 var timeNow = TimeOnly.FromDateTime(DateTime.Now);
+
                 if (viewModel.TravelDate == dateToday || viewModel.TravelDate == null)
                 {
-                    await TripSearch(viewModel, trip =>
-                        trip.DepartureTime >= timeNow);
+                    await TripSearch(viewModel, timeNow);
                 }
                 else if (viewModel.TravelDate > dateToday)
                 {
-                    await TripSearch(viewModel, trip => true);
+                    await TripSearch(viewModel, null);
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Travel date cannot be in the past.");
+                    ModelState.AddModelError(string.Empty, "Data e udhëtimit nuk mund të jetë në të kaluarën.");
                 }
             }
             return View(viewModel);
@@ -72,7 +73,7 @@ namespace InterCityBus_MK.Controllers
                 .ToListAsync();
         }
 
-        private async Task TripSearch(TripSearchViewModel viewModel, Expression<Func<Trip, bool>> timeComparison)
+        private async Task TripSearch(TripSearchViewModel viewModel, TimeOnly? filterTime)
         {
             var matchingTrips = await _dbContext.Stops.Where(s => s.StationId == viewModel.FromStationId)
                 .Join(_dbContext.Stops.Where(s => s.StationId == viewModel.ToStationId), 
@@ -92,6 +93,13 @@ namespace InterCityBus_MK.Controllers
                 .Where(stops => stops.FromStopOrder < stops.ToStopOrder)
                 .ToListAsync();
 
+            if (filterTime.HasValue)
+            {
+                matchingTrips = matchingTrips
+                    .Where(s => s.DepartureTime >= filterTime.Value)
+                    .ToList();
+            }
+
             var tripIds = matchingTrips.Select(t => t.TripId)
                 .Distinct()
                 .ToList();
@@ -99,7 +107,6 @@ namespace InterCityBus_MK.Controllers
             var trips = await _dbContext.Trips
                         .Include(t => t.Company)
                         .Where(trip => tripIds.Contains(trip.Id))
-                        .Where(timeComparison)
                         .ToListAsync();
 
             viewModel.Results = trips

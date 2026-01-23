@@ -9,5 +9,7 @@
         public TimeOnly DepartureTime { get; set; }
         public TimeOnly ArrivalTime { get; set; }
         public decimal Price { get; set; }
+
+        public List<StopDisplayViewModel>? AllStops { get; set; }
     }
 }

@@ -3,12 +3,12 @@ using InterCityBus_MK.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering; // Required for SelectList
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace InterCityBus_MK.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class StopsController : Controller
     {
         private ApplicationDbContext _dbContext;
