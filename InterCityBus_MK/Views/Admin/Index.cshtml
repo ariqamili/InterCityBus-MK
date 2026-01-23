@@ -3,63 +3,158 @@
     ViewData["Title"] = "Admin Dashboard";
 }
 
-<div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold text-secondary">Management Dashboard</h2>
-        <span class="badge bg-primary px-3 py-2">System Administrator</span>
+<div class="container-fluid py-4 bg-light min-vh-100">
+    <!-- Header Section -->
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-3 border-bottom">
+        <div>
+            <h2 class="fw-bold text-dark mb-1">
+                <i class="bi bi-speedometer2 text-primary me-2"></i>Management Dashboard
+            </h2>
+            <p class="text-muted mb-0">Welcome back! Here's an overview of your bus network.</p>
+        </div>
+        <span class="badge bg-primary bg-gradient px-3 py-2 rounded-pill shadow-sm">
+            <i class="bi bi-shield-check me-1"></i> System Administrator
+        </span>
     </div>
 
-    <div class="row g-4">
+    <!-- Stats Cards Grid -->
+    <div class="row g-4 mb-5">
+        <!-- Stations Card -->
         <div class="col-md-6 col-lg-3">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="display-6 text-primary mb-2">
-                        <i class="bi bi-geo-alt"></i>
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+                <div class="position-absolute top-0 start-0 w-100 h-1 bg-primary"></div>
+                <div class="card-body text-center p-4">
+                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                        <i class="bi bi-geo-alt-fill text-primary display-6"></i>
                     </div>
-                    <h5 class="card-title text-muted text-uppercase small fw-bold">Stations</h5>
-                    <h2 class="display-5 fw-bold">@Model.TotalStations</h2>
-                    <a asp-controller="Station" asp-action="Index" class="btn btn-outline-primary btn-sm w-100 mt-3 stretched-link">Manage Stations</a>
+                    <h6 class="text-muted text-uppercase small fw-bold letter-spacing-1 mb-2">Stations</h6>
+                    <h2 class="display-4 fw-bold text-dark mb-3">@Model.TotalStations</h2>
+                    <a asp-controller="Station" asp-action="Index" class="btn btn-primary btn-sm w-100 rounded-pill stretched-link">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Manage Stations
+                    </a>
                 </div>
             </div>
         </div>
 
+        <!-- Companies Card -->
         <div class="col-md-6 col-lg-3">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="display-6 text-success mb-2">
-                        <i class="bi bi-building"></i>
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+                <div class="position-absolute top-0 start-0 w-100 h-1 bg-success"></div>
+                <div class="card-body text-center p-4">
+                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                        <i class="bi bi-building-fill text-success display-6"></i>
                     </div>
-                    <h5 class="card-title text-muted text-uppercase small fw-bold">Companies</h5>
-                    <h2 class="display-5 fw-bold">@Model.TotalCompanies</h2>
-                    <a asp-controller="Company" asp-action="Index" class="btn btn-outline-success btn-sm w-100 mt-3 stretched-link">Manage Companies</a>
+                    <h6 class="text-muted text-uppercase small fw-bold letter-spacing-1 mb-2">Companies</h6>
+                    <h2 class="display-4 fw-bold text-dark mb-3">@Model.TotalCompanies</h2>
+                    <a asp-controller="Company" asp-action="Index" class="btn btn-success btn-sm w-100 rounded-pill stretched-link">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Manage Companies
+                    </a>
                 </div>
             </div>
         </div>
 
+        <!-- Trips Card -->
         <div class="col-md-6 col-lg-3">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="display-6 text-warning mb-2">
-                        <i class="bi bi-bus-front"></i>
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+                <div class="position-absolute top-0 start-0 w-100 h-1 bg-warning"></div>
+                <div class="card-body text-center p-4">
+                    <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                        <i class="bi bi-bus-front-fill text-warning display-6"></i>
                     </div>
-                    <h5 class="card-title text-muted text-uppercase small fw-bold">Active Trips</h5>
-                    <h2 class="display-5 fw-bold">@Model.TotalTrips</h2>
-                    <a asp-controller="Trip" asp-action="Index" class="btn btn-outline-warning btn-sm w-100 mt-3 stretched-link">Manage Trips</a>
+                    <h6 class="text-muted text-uppercase small fw-bold letter-spacing-1 mb-2">Active Trips</h6>
+                    <h2 class="display-4 fw-bold text-dark mb-3">@Model.TotalTrips</h2>
+                    <a asp-controller="Trip" asp-action="Index" class="btn btn-warning btn-sm w-100 rounded-pill stretched-link text-dark">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Manage Trips
+                    </a>
                 </div>
             </div>
         </div>
 
+        <!-- Stops Card -->
         <div class="col-md-6 col-lg-3">
-            <div class="card h-100 border-0 shadow-sm">
-                <div class="card-body text-center">
-                    <div class="display-6 text-danger mb-2">
-                        <i class="bi bi-signpost-split"></i>
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative">
+                <div class="position-absolute top-0 start-0 w-100 h-1 bg-danger"></div>
+                <div class="card-body text-center p-4">
+                    <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                        <i class="bi bi-signpost-split-fill text-danger display-6"></i>
                     </div>
-                    <h5 class="card-title text-muted text-uppercase small fw-bold">Route Stops</h5>
-                    <h2 class="display-5 fw-bold">@Model.TotalStops</h2>
-                    <a asp-controller="Stops" asp-action="Index" class="btn btn-outline-danger btn-sm w-100 mt-3 stretched-link">Manage Stops</a>
+                    <h6 class="text-muted text-uppercase small fw-bold letter-spacing-1 mb-2">Route Stops</h6>
+                    <h2 class="display-4 fw-bold text-dark mb-3">@Model.TotalStops</h2>
+                    <a asp-controller="Stops" asp-action="Index" class="btn btn-danger btn-sm w-100 rounded-pill stretched-link">
+                        <i class="bi bi-arrow-right-circle me-1"></i> Manage Stops
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions Section -->
+    <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-header bg-white border-0 pt-4 pb-3">
+            <h5 class="fw-bold mb-0">
+                <i class="bi bi-lightning-charge-fill text-warning me-2"></i>Quick Actions
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <a asp-controller="Trip" asp-action="Create" class="btn btn-outline-primary w-100 py-3 rounded-3 d-flex flex-column align-items-center">
+                        <i class="bi bi-plus-circle-fill fs-4 mb-2"></i>
+                        <span>Add New Trip</span>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a asp-controller="Station" asp-action="Create" class="btn btn-outline-success w-100 py-3 rounded-3 d-flex flex-column align-items-center">
+                        <i class="bi bi-geo-alt-fill fs-4 mb-2"></i>
+                        <span>Add Station</span>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a asp-controller="Company" asp-action="Create" class="btn btn-outline-warning w-100 py-3 rounded-3 d-flex flex-column align-items-center text-dark">
+                        <i class="bi bi-building-fill-add fs-4 mb-2"></i>
+                        <span>Add Company</span>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a asp-controller="Stops" asp-action="Create" class="btn btn-outline-danger w-100 py-3 rounded-3 d-flex flex-column align-items-center">
+                        <i class="bi bi-signpost-2-fill fs-4 mb-2"></i>
+                        <span>Add Stop</span>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Styles {
+    <style>
+        .h-1 {
+            height: 4px;
+        }
+
+        .letter-spacing-1 {
+            letter-spacing: 0.5px;
+        }
+
+        .rounded-4 {
+            border-radius: 1rem !important;
+        }
+
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 1rem 3rem rgba(0,0,0,.1) !important;
+            }
+
+        .btn {
+            transition: all 0.2s ease;
+        }
+
+            .btn:hover {
+                transform: translateY(-2px);
+            }
+    </style>
+}
