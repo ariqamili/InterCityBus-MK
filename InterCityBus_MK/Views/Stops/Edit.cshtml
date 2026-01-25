@@ -1,56 +1,122 @@
 ﻿@model InterCityBus_MK.Models.Stop
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Stop";
 }
 
-<h1>Edit Stop</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb bg-transparent p-0">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Admin" asp-action="Index" class="text-decoration-none">
+                            <i class="bi bi-house-fill me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index" class="text-decoration-none">Stops</a>
+                    </li>
+                    <li class="breadcrumb-item active">Edit</li>
+                </ol>
+            </nav>
 
-<h4>Stop Details</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-
-            <div class="form-group mb-3">
-                <label asp-for="TripId" class="control-label">Trip</label>
-                <select asp-for="TripId" class="form-control" asp-items="ViewBag.TripId"></select>
-                <span asp-validation-for="TripId" class="text-danger"></span>
+            <div class="mb-4">
+                <h2 class="fw-bold mb-2">
+                    <i class="bi bi-pencil-square me-2 text-danger"></i>
+                    Edit Stop
+                </h2>
+                <p class="text-muted">Update stop information</p>
             </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="StationId" class="control-label">Station</label>
-                <select asp-for="StationId" class="form-control" asp-items="ViewBag.StationId"></select>
-                <span asp-validation-for="StationId" class="text-danger"></span>
-            </div>
+            <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
+                <div class="card-header py-3" style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white;">
+                    <h5 class="mb-0 fw-semibold">
+                        <i class="bi bi-signpost-split me-2"></i>Update Stop Information
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4"></div>
+                        <input type="hidden" asp-for="Id" />
 
-            <div class="form-group mb-3">
-                <label asp-for="StopOrder" class="control-label"></label>
-                <input asp-for="StopOrder" class="form-control" />
-                <span asp-validation-for="StopOrder" class="text-danger"></span>
-            </div>
+                        <div class="mb-4">
+                            <label asp-for="TripId" class="form-label fw-semibold">
+                                <i class="bi bi-bus-front me-2 text-danger"></i>Trip
+                            </label>
+                            <select asp-for="TripId" class="form-select form-select-lg"
+                                    asp-items="ViewBag.TripId"
+                                    style="border-radius: 10px; border: 2px solid var(--border-color);">
+                            </select>
+                            <span asp-validation-for="TripId" class="text-danger small"></span>
+                        </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="ArrivalTime" class="control-label"></label>
-                <input asp-for="ArrivalTime" type="time" class="form-control" />
-                <span asp-validation-for="ArrivalTime" class="text-danger"></span>
-            </div>
+                        <div class="mb-4">
+                            <label asp-for="StationId" class="form-label fw-semibold">
+                                <i class="bi bi-geo-alt me-2 text-danger"></i>Station
+                            </label>
+                            <select asp-for="StationId" class="form-select form-select-lg"
+                                    asp-items="ViewBag.StationId"
+                                    style="border-radius: 10px; border: 2px solid var(--border-color);">
+                            </select>
+                            <span asp-validation-for="StationId" class="text-danger small"></span>
+                        </div>
 
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                        <div class="p-3 rounded-3 mb-4" style="background-color: var(--bg-light);">
+                            <h6 class="text-uppercase small fw-bold mb-3" style="color: var(--text-muted); letter-spacing: 0.5px;">
+                                <i class="bi bi-list-ol me-2"></i>Stop Details
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="StopOrder" class="form-label fw-semibold">
+                                        <i class="bi bi-sort-numeric-down me-2 text-danger"></i>Stop Order
+                                    </label>
+                                    <input asp-for="StopOrder" type="number" class="form-control form-control-lg"
+                                           style="border-radius: 10px; border: 2px solid var(--border-color);" />
+                                    <span asp-validation-for="StopOrder" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="ArrivalTime" class="form-label fw-semibold">
+                                        <i class="bi bi-clock me-2 text-danger"></i>Arrival Time
+                                    </label>
+                                    <input asp-for="ArrivalTime" type="time" class="form-control form-control-lg"
+                                           style="border-radius: 10px; border: 2px solid var(--border-color);" />
+                                    <span asp-validation-for="ArrivalTime" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="flex-grow-1 py-3"
+                                    style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+                                           color: white; border: none; border-radius: 8px; font-weight: 600;">
+                                <i class="bi bi-check-circle me-2"></i>Save Changes
+                            </button>
+                            <a asp-action="Index" class="btn-outline-custom py-3 px-4">
+                                <i class="bi bi-x-circle me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+}
+
+@section Styles {
+    <style>
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25) !important;
+        }
+    </style>
 }

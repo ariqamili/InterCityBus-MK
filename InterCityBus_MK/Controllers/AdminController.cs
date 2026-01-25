@@ -7,7 +7,7 @@ using InterCityBus_MK.ViewModels;
 
 namespace InterCityBus_MK.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly ApplicationDbContext _context;

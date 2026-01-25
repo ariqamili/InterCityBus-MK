@@ -12,7 +12,7 @@ namespace InterCityBus_MK.ViewModels
         public int? ToStationId { get; set; }
 
         [DataType(DataType.Date)]
-        public DateOnly? TravelDate { get; set; }
+        public DateOnly? TravelDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
         public bool HasSearched { get; set; } = false;
 

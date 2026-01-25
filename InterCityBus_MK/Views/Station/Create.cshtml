@@ -1,38 +1,99 @@
 ﻿@model InterCityBus_MK.Models.Station
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add New Station";
 }
 
-<h1>Create</h1>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb bg-transparent p-0">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Admin" asp-action="Index" class="text-decoration-none text-primary">
+                            <i class="bi bi-house-fill me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index" class="text-decoration-none text-primary">Stations</a>
+                    </li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </nav>
 
-<h4>Station</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="mb-4">
+                <h2 class="fw-bold mb-2 text-dark">
+                    <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+                    Add New Station
+                </h2>
+                <p class="text-muted">Create a new bus station in the network</p>
             </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
+
+            <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
+                <div class="card-header py-3" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); color: white;">
+                    <h5 class="mb-0 fw-semibold">
+                        <i class="bi bi-info-circle me-2"></i>Station Information
+                    </h5>
+                </div>
+
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="Name" class="form-label fw-semibold">
+                                <i class="bi bi-building me-2 text-primary"></i>Station Name
+                            </label>
+                            <input asp-for="Name" class="form-control form-control-lg"
+                                   placeholder="e.g., Central Bus Station"
+                                   style="border-radius: 10px; border: 2px solid #e9ecef;" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="City" class="form-label fw-semibold">
+                                <i class="bi bi-geo-alt me-2 text-primary"></i>City
+                            </label>
+                            <input asp-for="City" class="form-control form-control-lg"
+                                   placeholder="e.g., Skopje"
+                                   style="border-radius: 10px; border: 2px solid #e9ecef;" />
+                            <span asp-validation-for="City" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="btn flex-grow-1 py-3"
+                                    style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+                                           color: white; border: none; border-radius: 10px; font-weight: 600; transition: all 0.3s;">
+                                <i class="bi bi-check-circle me-2"></i>Create Station
+                            </button>
+                            <a asp-action="Index" class="btn-outline-custom py-3 px-4">
+                                <i class="bi bi-x-circle me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@section Styles {
+    <style>
+        .form-control:focus {
+            border-color: #0d6efd !important;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15) !important;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.25);
+            filter: brightness(1.1);
+        }
+    </style>
 }

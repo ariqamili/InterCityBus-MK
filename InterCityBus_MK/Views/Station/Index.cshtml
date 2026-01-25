@@ -3,57 +3,212 @@
     ViewData["Title"] = "Stations Management";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="fw-bold mb-0">Bus Stations</h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Dashboard</a></li>
-                <li class="breadcrumb-item active">Stations</li>
-            </ol>
-        </nav>
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5 flex-wrap gap-3">
+        <div>
+            <h2 class="fw-800 text-dark mb-1">
+                <i class="bi bi-building text-primary me-2"></i>Bus Stations
+            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 bg-transparent p-0">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Admin" asp-action="Index" class="text-decoration-none text-primary fw-bold">
+                            <i class="bi bi-house-fill me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active fw-bold text-muted">Stations</li>
+                </ol>
+            </nav>
+        </div>
+        <a asp-action="Create" class="btn btn-blue-gradient px-4 py-3 rounded-12 shadow-sm">
+            <i class="bi bi-plus-lg me-2"></i>Add Station
+        </a>
     </div>
-    <a asp-action="Create" class="btn btn-primary">
-        <i class="bi bi-plus-lg me-1"></i> Add Station
-    </a>
+
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card border-0 shadow-sm h-100 station-card rounded-24 overflow-hidden">
+                    <div class="card-header-bar bg-primary px-4 py-3 d-flex align-items-center">
+                        <div class="header-icon-box bg-white text-primary me-3">
+                            <i class="bi bi-building"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <h5 class="mb-0 fw-800 text-white text-truncate">@item.Name</h5>
+                            <small class="text-white-50"><i class="bi bi-geo-alt-fill me-1"></i>@item.City</small>
+                        </div>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <div class="mb-3 info-group">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <i class="bi bi-building text-primary"></i>
+                                <span class="field-label-mini">Station Name</span>
+                            </div>
+                            <p class="mb-0 fw-bold text-dark">@item.Name</p>
+                        </div>
+
+                        <div class="mb-4 info-group">
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <i class="bi bi-geo-alt text-primary"></i>
+                                <span class="field-label-mini">Location</span>
+                            </div>
+                            <p class="mb-0 fw-bold text-dark">@item.City</p>
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <a asp-action="Details" asp-route-id="@item.Id"
+                               class="btn btn-blue-soft flex-grow-1 fw-bold">
+                                <i class="bi bi-eye me-1"></i>View
+                            </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id"
+                               class="btn btn-yellow-soft-mini px-3">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id"
+                               class="btn btn-red-soft-mini px-3">
+                                <i class="bi bi-trash3-fill"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="text-center py-5 no-data-container rounded-32 shadow-sm bg-white mt-4">
+            <div class="feature-icon-wrapper mb-4 bg-primary-soft">
+                <i class="bi bi-building text-primary" style="font-size: 3rem;"></i>
+            </div>
+            <h4 class="fw-800 text-dark mb-3">No Stations Yet</h4>
+            <p class="text-muted mb-4 px-3">Your network is empty. Start building your bus route infrastructure now.</p>
+            <a asp-action="Create" class="btn btn-blue-gradient px-4 py-3 rounded-12">
+                <i class="bi bi-plus-lg me-2"></i>Add Your First Station
+            </a>
+        </div>
+    }
 </div>
 
-<div class="card border-0 shadow-sm">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="bg-light text-muted small text-uppercase">
-                <tr>
-                    <th class="ps-4">@Html.DisplayNameFor(model => model.Name)</th>
-                    <th>@Html.DisplayNameFor(model => model.City)</th>
-                    <th class="text-end pe-4">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="ps-4">
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-building-fill text-primary me-2"></i>
-                                <span class="fw-bold text-dark">@item.Name</span>
-                            </div>
-                        </td>
-                        <td>
-                            <i class="bi bi-geo-alt me-1 text-muted"></i> @item.City
-                        </td>
-                        <td class="text-end pe-4">
-                            <div class="btn-group btn-group-sm">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary" title="Edit">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Delete">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+@section Styles {
+    <style>
+        :root {
+            --primary-blue: #0d6efd;
+            --soft-blue: rgba(13, 110, 253, 0.08);
+            --soft-yellow: rgba(255, 193, 7, 0.12);
+            --soft-red: rgba(220, 53, 69, 0.1);
+        }
+
+        .fw-800 {
+            font-weight: 800;
+        }
+
+        .rounded-24 {
+            border-radius: 24px !important;
+        }
+
+        .rounded-12 {
+            border-radius: 12px !important;
+        }
+
+        /* Card Transitions */
+        .station-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+            .station-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(13, 110, 253, 0.12) !important;
+            }
+
+        /* Header Bar Style - Matches Company Index */
+        .card-header-bar {
+            border: none;
+        }
+
+        .header-icon-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        /* Labels and Text */
+        .field-label-mini {
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: #adb5bd;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Themed Buttons */
+        .btn-blue-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            font-weight: 700;
+        }
+
+            .btn-blue-gradient:hover {
+                color: white;
+                opacity: 0.9;
+                transform: translateY(-2px);
+            }
+
+        .btn-blue-soft {
+            background-color: var(--soft-blue);
+            color: var(--primary-blue);
+            border: none;
+            padding: 0.6rem;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+            .btn-blue-soft:hover {
+                background-color: var(--primary-blue);
+                color: white;
+            }
+
+        .btn-yellow-soft-mini {
+            background-color: var(--soft-yellow);
+            color: #ff8f00;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+            .btn-yellow-soft-mini:hover {
+                background-color: #ffc107;
+                color: black;
+            }
+
+        .btn-red-soft-mini {
+            background-color: var(--soft-red);
+            color: #dc3545;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.2s;
+        }
+
+            .btn-red-soft-mini:hover {
+                background-color: #dc3545;
+                color: white;
+            }
+
+        /* Empty State */
+        .no-data-container {
+            padding: 80px 20px;
+        }
+
+        .bg-primary-soft {
+            background-color: var(--soft-blue);
+        }
+    </style>
+}

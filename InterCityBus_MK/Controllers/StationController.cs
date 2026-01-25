@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InterCityBus_MK.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class StationController : Controller
     {
         private ApplicationDbContext _dbContext;
@@ -63,6 +63,15 @@ namespace InterCityBus_MK.Controllers
             return View(station);
         }
 
+        public async Task<ActionResult> Details(int id)
+        {
+            var station = await _dbContext.Stations.FindAsync(id);
+            if (station == null)
+            {
+                return NotFound();
+            }
+            return View(station);
+        }
         public async Task<ActionResult> Delete(int id)
         {
             var station = await _dbContext.Stations.FindAsync(id);

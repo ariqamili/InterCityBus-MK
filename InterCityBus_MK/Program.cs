@@ -4,31 +4,43 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// REQUIRED: Add Razor Pages support (needed for the Login/Register UI)
 builder.Services.AddRazorPages();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
 
-// 2. Configure Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
-    // Optional: specific password settings
+    options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit = true;
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;
 })
+    .AddRoles<IdentityRole>() 
     .AddEntityFrameworkStores<ApplicationDbContext>()
-    .AddDefaultUI() // <--- CRITICAL: Enables the default Login/Register pages
+    .AddDefaultUI() 
     .AddDefaultTokenProviders();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+        var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+        await DbInitializer.Initialize(userManager, roleManager);
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -40,7 +52,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// 3. CRITICAL FIX: Authentication MUST come before Authorization
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -48,7 +60,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// 4. Map the Razor Pages (needed for the Identity UI)
+
 app.MapRazorPages();
 
 app.Run();

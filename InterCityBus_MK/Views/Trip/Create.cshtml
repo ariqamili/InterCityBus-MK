@@ -1,70 +1,139 @@
 ﻿@model InterCityBus_MK.ViewModels.TripFormViewModel
 
 @{
-    ViewData["Title"] = "Shto Udhëtim";
+    ViewData["Title"] = "Add New Trip";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-6 border p-4 shadow-sm bg-light rounded">
-        <h2 class="text-center">@ViewData["Title"]</h2>
-        <hr />
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <nav aria-label="breadcrumb" class="mb-4">
+                <ol class="breadcrumb bg-transparent p-0">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Admin" asp-action="Index" class="text-decoration-none">
+                            <i class="bi bi-house-fill me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a asp-action="Index" class="text-decoration-none">Trips</a>
+                    </li>
+                    <li class="breadcrumb-item active">Create</li>
+                </ol>
+            </nav>
 
-            <div class="mb-3">
-                <label asp-for="CompanyId" class="form-label">Kompania</label>
-                <select asp-for="CompanyId" class="form-select" asp-items="@(new SelectList(Model.Companies, "Id", "Name"))">
-                    <option value="">-- Zgjidh Kompaninë --</option>
-                </select>
-                <span asp-validation-for="CompanyId" class="text-danger"></span>
+            <div class="mb-4">
+                <h2 class="fw-bold mb-2">
+                    <i class="bi bi-bus-front-fill me-2 text-warning"></i>
+                    Add New Trip
+                </h2>
+                <p class="text-muted">Create a new bus trip route</p>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="FromStationId" class="form-label">Stacioni i Nisjes</label>
-                    <select asp-for="FromStationId" class="form-select" asp-items="@(new SelectList(Model.Stations, "Id", "Name"))">
-                        <option value="">-- Prej --</option>
-                    </select>
-                    <span asp-validation-for="FromStationId" class="text-danger"></span>
+            <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
+                <div class="card-header py-3" style="background: linear-gradient(135deg, #ffc107 0%, #ff6f00 100%); color: white;">
+                    <h5 class="mb-0 fw-semibold">
+                        <i class="bi bi-info-circle me-2"></i>Trip Information
+                    </h5>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label asp-for="ToStationId" class="form-label">Destinacioni</label>
-                    <select asp-for="ToStationId" class="form-select" asp-items="@(new SelectList(Model.Stations, "Id", "Name"))">
-                        <option value="">-- Tek --</option>
-                    </select>
-                    <span asp-validation-for="ToStationId" class="text-danger"></span>
+                <div class="card-body p-4">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-3 mb-4"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="CompanyId" class="form-label fw-semibold">
+                                <i class="bi bi-building me-2 text-warning"></i>Transport Company
+                            </label>
+                            <select asp-for="CompanyId" class="form-select form-select-lg"
+                                    asp-items="@(new SelectList(Model.Companies, "Id", "Name"))"
+                                    style="border-radius: 10px; border: 2px solid var(--border-color);">
+                                <option value="">-- Select Company --</option>
+                            </select>
+                            <span asp-validation-for="CompanyId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="p-3 rounded-3 mb-4" style="background-color: var(--bg-light);">
+                            <h6 class="text-uppercase small fw-bold mb-3" style="color: var(--text-muted); letter-spacing: 0.5px;">
+                                <i class="bi bi-map me-2"></i>Route Details
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="FromStationId" class="form-label fw-semibold">
+                                        <i class="bi bi-geo-alt me-2 text-warning"></i>Departure Station
+                                    </label>
+                                    <select asp-for="FromStationId" class="form-select form-select-lg"
+                                            asp-items="@(new SelectList(Model.Stations, "Id", "Name"))"
+                                            style="border-radius: 10px; border: 2px solid var(--border-color);">
+                                        <option value="">-- From --</option>
+                                    </select>
+                                    <span asp-validation-for="FromStationId" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="ToStationId" class="form-label fw-semibold">
+                                        <i class="bi bi-pin-map me-2 text-warning"></i>Arrival Station
+                                    </label>
+                                    <select asp-for="ToStationId" class="form-select form-select-lg"
+                                            asp-items="@(new SelectList(Model.Stations, "Id", "Name"))"
+                                            style="border-radius: 10px; border: 2px solid var(--border-color);">
+                                        <option value="">-- To --</option>
+                                    </select>
+                                    <span asp-validation-for="ToStationId" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 rounded-3 mb-4" style="background-color: var(--bg-light);">
+                            <h6 class="text-uppercase small fw-bold mb-3" style="color: var(--text-muted); letter-spacing: 0.5px;">
+                                <i class="bi bi-clock me-2"></i>Schedule
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="DepartureTime" class="form-label fw-semibold">
+                                        <i class="bi bi-clock-history me-2 text-warning"></i>Departure Time
+                                    </label>
+                                    <input asp-for="DepartureTime" type="time" class="form-control form-control-lg"
+                                           style="border-radius: 10px; border: 2px solid var(--border-color);" />
+                                    <span asp-validation-for="DepartureTime" class="text-danger small"></span>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label asp-for="ArrivalTime" class="form-label fw-semibold">
+                                        <i class="bi bi-clock-fill me-2 text-warning"></i>Arrival Time
+                                    </label>
+                                    <input asp-for="ArrivalTime" type="time" class="form-control form-control-lg"
+                                           style="border-radius: 10px; border: 2px solid var(--border-color);" />
+                                    <span asp-validation-for="ArrivalTime" class="text-danger small"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Price" class="form-label fw-semibold">
+                                <i class="bi bi-currency-exchange me-2 text-warning"></i>Price (MKD)
+                            </label>
+                            <input asp-for="Price" class="form-control form-control-lg"
+                                   placeholder="0.00"
+                                   style="border-radius: 10px; border: 2px solid var(--border-color);" />
+                            <span asp-validation-for="Price" class="text-danger small"></span>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex gap-3">
+                            <button type="submit" class="flex-grow-1 py-3"
+                                    style="background: linear-gradient(135deg, #ffc107 0%, #ff6f00 100%);
+                                           color: white; border: none; border-radius: 8px; font-weight: 600;">
+                                <i class="bi bi-check-circle me-2"></i>Create Trip
+                            </button>
+                            <a asp-action="Index" class="btn-outline-custom py-3 px-4">
+                                <i class="bi bi-x-circle me-2"></i>Cancel
+                            </a>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label asp-for="DepartureTime" class="form-label">Ora e Nisjes</label>
-                    <input asp-for="DepartureTime" class="form-control" type="time" />
-                    <span asp-validation-for="DepartureTime" class="text-danger"></span>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label asp-for="ArrivalTime" class="form-label">Ora e Mbërritjes</label>
-                    <input asp-for="ArrivalTime" class="form-control" type="time" />
-                    <span asp-validation-for="ArrivalTime" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="Price" class="form-label">Çmimi (MKD)</label>
-                <input asp-for="Price" class="form-control" placeholder="0.00" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-success">Ruaj Udhëtimin</button>
-                <a asp-action="Index" class="btn btn-secondary">Kthehu te Lista</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }

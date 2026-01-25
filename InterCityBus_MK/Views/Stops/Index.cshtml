@@ -3,65 +3,144 @@
     ViewData["Title"] = "Stops Management";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h2 class="fw-bold mb-0">Route Stops</h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0">
-                <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Dashboard</a></li>
-                <li class="breadcrumb-item active">Stops</li>
-            </ol>
-        </nav>
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div>
+            <h2 class="fw-bold mb-2">
+                <i class="bi bi-signpost-split-fill me-2 text-danger"></i>
+                Route Stops
+            </h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 bg-transparent p-0">
+                    <li class="breadcrumb-item">
+                        <a asp-controller="Admin" asp-action="Index" class="text-decoration-none">
+                            <i class="bi bi-house-fill me-1"></i>Dashboard
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active">Stops</li>
+                </ol>
+            </nav>
+        </div>
+        <a asp-action="Create" class="px-4 py-3"
+           style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+                  color: white; border: none; border-radius: 8px; font-weight: 600;
+                  text-decoration: none; display: inline-block; transition: all 0.3s ease;">
+            <i class="bi bi-plus-lg me-2"></i>Add Stop
+        </a>
     </div>
-    <a asp-action="Create" class="btn btn-primary">
-        <i class="bi bi-plus-lg me-1"></i> Create New Stop
-    </a>
+
+    <div class="card border-0 shadow-sm" style="border-radius: 16px; overflow: hidden;">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead style="background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(200, 35, 51, 0.1) 100%);">
+                    <tr>
+                        <th class="ps-4 py-3 fw-bold" style="color: var(--text-dark); border: none;">
+                            <i class="bi bi-bus-front me-2"></i>Trip
+                        </th>
+                        <th class="py-3 fw-bold" style="color: var(--text-dark); border: none;">
+                            <i class="bi bi-geo-alt me-2"></i>Station
+                        </th>
+                        <th class="text-center py-3 fw-bold" style="color: var(--text-dark); border: none;">
+                            <i class="bi bi-sort-numeric-down me-2"></i>Order
+                        </th>
+                        <th class="py-3 fw-bold" style="color: var(--text-dark); border: none;">
+                            <i class="bi bi-clock me-2"></i>Arrival Time
+                        </th>
+                        <th class="text-end pe-4 py-3 fw-bold" style="color: var(--text-dark); border: none;">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr style="transition: all 0.2s ease;">
+                            <td class="ps-4 py-3">
+                                <span class="badge px-3 py-2"
+                                      style="background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(200, 35, 51, 0.1) 100%);
+                                                 color: #dc3545; border-radius: 8px; font-weight: 600;">
+                                    #@item.TripId
+                                </span>
+                            </td>
+                            <td class="py-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="d-flex align-items-center justify-content-center"
+                                         style="width: 36px; height: 36px; border-radius: 8px;
+                                                    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(200, 35, 51, 0.1) 100%);">
+                                        <i class="bi bi-geo-alt-fill text-danger"></i>
+                                    </div>
+                                    <span class="fw-semibold">@item.Station?.Name</span>
+                                </div>
+                            </td>
+                            <td class="text-center py-3">
+                                <span class="badge bg-light text-dark border px-3 py-2" style="border-radius: 8px; font-weight: 600;">
+                                    @item.StopOrder
+                                </span>
+                            </td>
+                            <td class="py-3">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i class="bi bi-clock text-muted"></i>
+                                    <span class="fw-semibold">@item.ArrivalTime.ToString("HH:mm")</span>
+                                </div>
+                            </td>
+                            <td class="text-end pe-4 py-3">
+                                <div class="d-inline-flex gap-2">
+                                    <a asp-action="Edit" asp-route-id="@item.Id"
+                                       class="btn btn-sm"
+                                       style="background: rgba(255, 193, 7, 0.1); color: #ff6f00;
+                                                  border: none; border-radius: 8px; padding: 0.5rem 1rem; font-weight: 600;
+                                                  transition: all 0.2s ease;"
+                                       title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"
+                                       class="btn btn-sm"
+                                       style="background: rgba(220, 53, 69, 0.1); color: #dc3545;
+                                                  border: none; border-radius: 8px; padding: 0.5rem 1rem; font-weight: 600;
+                                                  transition: all 0.2s ease;"
+                                       title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <div class="mb-4">
+                    <i class="bi bi-signpost-split" style="font-size: 4rem; color: var(--text-muted); opacity: 0.3;"></i>
+                </div>
+                <h4 class="text-muted mb-3">No Stops Yet</h4>
+                <p class="text-muted mb-4">Get started by adding your first route stop</p>
+                <a asp-action="Create" class="px-4 py-3"
+                   style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+                              color: white; border: none; border-radius: 8px; font-weight: 600;
+                              text-decoration: none; display: inline-block;">
+                    <i class="bi bi-plus-lg me-2"></i>Add Your First Stop
+                </a>
+            </div>
+        }
+    </div>
 </div>
 
-<div class="card border-0 shadow-sm">
-    <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0">
-            <thead class="bg-light text-muted small text-uppercase">
-                <tr>
-                    <th class="ps-4">@Html.DisplayNameFor(model => model.Trip)</th>
-                    <th>@Html.DisplayNameFor(model => model.Station)</th>
-                    <th class="text-center">Order</th>
-                    <th>@Html.DisplayNameFor(model => model.ArrivalTime)</th>
-                    <th class="text-end pe-4">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="ps-4">
-                            <span class="fw-bold text-dark">#@item.TripId</span>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <i class="bi bi-geo-alt text-primary me-2"></i>
-                                @item.Station?.Name
-                            </div>
-                        </td>
-                        <td class="text-center">
-                            <span class="badge bg-light text-dark border">@item.StopOrder</span>
-                        </td>
-                        <td>
-                            <i class="bi bi-clock me-1 text-muted"></i> @item.ArrivalTime.ToString("HH:mm")
-                        </td>
-                        <td class="text-end pe-4">
-                            <div class="btn-group btn-group-sm">
-                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-secondary" title="Edit">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Delete">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+@section Styles {
+    <style>
+        tbody tr:hover {
+            background-color: rgba(220, 53, 69, 0.03);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        a[style*="background: linear-gradient(135deg, #dc3545"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.3);
+        }
+    </style>
+}

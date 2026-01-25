@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Log In";
+}
+
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-lg rounded-32 p-4">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="feature-icon-wrapper mb-3 bg-purple-gradient">
+                            <i class="bi bi-person-circle text-white fs-2"></i>
+                        </div>
+                        <h2 class="fw-800 text-dark">Welcome Back</h2>
+                        <p class="text-muted">Log in to your account</p>
+                    </div>
+
+                    <form asp-action="Login" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label class="field-label-mini">EMAIL ADDRESS</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-envelope icon-left"></i>
+                                <input name="email" type="email" class="modern-input" placeholder="traveler@example.com" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="field-label-mini">PASSWORD</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-lock icon-left"></i>
+                                <input name="password" type="password" class="modern-input" placeholder="••••••••" required />
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="rememberMe" id="rememberMe">
+                                <label class="form-check-label text-muted small fw-bold" for="rememberMe">
+                                    Remember me
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-purple-gradient w-100 py-3 rounded-16 fw-bold text-white shadow-sm mb-3">
+                            Log In
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p class="text-muted small">
+                            New to the network?
+                            <a asp-action="Register" class="text-primary fw-bold text-decoration-none">Register now</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

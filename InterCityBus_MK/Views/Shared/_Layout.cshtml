@@ -3,76 +3,186 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - InterCityBus_MK</title>
+    <title>@ViewData["Title"] - InterCityBus MK</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/InterCityBus_MK.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #fcfcfc;
+        }
 
-    @RenderSection("Styles", required: false)
+        main {
+            flex: 1;
+        }
+
+        .navbar-custom {
+            background: white;
+            padding: 16px 0;
+            border-bottom: 1px solid #f0f0f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+
+        .navbar-brand-gradient {
+            font-weight: 800;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+            .navbar-brand-gradient i {
+                -webkit-text-fill-color: initial;
+                color: #667eea;
+                margin-right: 12px;
+            }
+
+        /* Nav Buttons */
+        .admin-btn-nav {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+            color: white !important;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            box-shadow: 0 4px 12px rgba(255, 117, 140, 0.2);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .logout-btn-themed {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white !important;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .user-pill {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #667eea;
+            display: flex;
+            align-items: center;
+        }
+
+        @@media (max-width: 991.98px) {
+            .navbar-collapse
+
+        {
+            background: white;
+            margin-top: 15px;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .nav-item-mobile {
+            margin-bottom: 15px;
+            width: 100%;
+        }
+
+        .admin-btn-nav, .logout-btn-themed {
+            width: 100%;
+            text-align: center;
+        }
+
+        .user-pill {
+            margin-bottom: 10px;
+        }
+
+        }
+
+        .footer-custom {
+            background: white;
+            border-top: 1px solid #eee;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        :root {
+            --purple-main: #667eea;
+            --purple-dark: #764ba2;
+            --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">InterCityBus_MK</a>
+        <nav class="navbar navbar-expand-lg navbar-custom">
+            <div class="container">
+                <a class="navbar-brand-gradient" asp-controller="Home" asp-action="Index">
+                    <i class="bi bi-bus-front-fill"></i>InterCityBus MK
+                </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark fw-bold" asp-area="" asp-controller="Admin" asp-action="Index">
-                                <i class="bi bi-speedometer2 me-1"></i> Admin Dashboard
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Station" asp-action="Index">Stations</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Company" asp-action="Index">Company</a>
-                        </li>
-
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        @if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item nav-item-mobile ms-lg-3">
+                                <a class="admin-btn-nav" asp-area="Admin" asp-controller="Admin" asp-action="Index">
+                                    <i class="bi bi-speedometer2 me-1"></i> Admin Dashboard
+                                </a>
+                            </li>
+                        }
                     </ul>
 
-                    <partial name="_LoginPartial" />
-
+                    <div class="d-flex flex-column flex-lg-row align-items-start align-items-lg-center">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <div class="user-pill me-lg-3 mb-3 mb-lg-0">
+                                <i class="bi bi-person-circle me-2"></i>Hello, @User.Identity.Name.Split('@')[0]!
+                            </div>
+                            <form class="w-100" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" class="logout-btn-themed border-0">Logout</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <a class="nav-link fw-bold me-lg-4 mb-2 mb-lg-0" style="color: #667eea"
+                               asp-controller="Account" asp-action="Login">Login</a>
+                            <a class="btn btn-purple-gradient rounded-pill px-4 py-2 fw-bold text-white w-100 w-lg-auto"
+                               asp-controller="Account" asp-action="Register">Register</a>
+                        }
+                    </div>
                 </div>
             </div>
         </nav>
     </header>
 
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    <main role="main">@RenderBody()</main>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - InterCityBus_MK - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer-custom">
+        <div class="container text-center">
+            <p class="text-muted mb-0 small">&copy; 2026 - <span class="fw-bold" style="color: #764ba2;">InterCityBus MK</span></p>
         </div>
     </footer>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

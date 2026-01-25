@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InterCityBus_MK.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class StopsController : Controller
     {
         private ApplicationDbContext _dbContext;
@@ -20,17 +20,17 @@ namespace InterCityBus_MK.Controllers
 
         public async Task<ActionResult> Index(CancellationToken ct)
         {
-            // We use Include to fetch the related data for display
-            var stops = await _dbContext.Stops.ToListAsync(ct);
+            var stops = await _dbContext.Stops
+                .Include(s => s.Station)
+                .ToListAsync(ct);
 
             return View(stops);
         }
 
         public ActionResult Create()
         {
-            // Populate dropdowns for the view
             ViewData["StationId"] = new SelectList(_dbContext.Stations, "Id", "Name");
-            ViewData["TripId"] = new SelectList(_dbContext.Trips, "Id", "Id"); // Using Id as display text for Trip, change if Trip has a name
+            ViewData["TripId"] = new SelectList(_dbContext.Trips, "Id", "Id"); 
             return View();
         }
 
@@ -45,7 +45,6 @@ namespace InterCityBus_MK.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // If validation fails, reload the dropdowns so the form isn't empty
             ViewData["StationId"] = new SelectList(_dbContext.Stations, "Id", "Name", stop.StationId);
             ViewData["TripId"] = new SelectList(_dbContext.Trips, "Id", "Id", stop.TripId);
             return View(stop);
@@ -59,7 +58,6 @@ namespace InterCityBus_MK.Controllers
                 return NotFound();
             }
 
-            // Populate dropdowns with the current selection
             ViewData["StationId"] = new SelectList(_dbContext.Stations, "Id", "Name", stop.StationId);
             ViewData["TripId"] = new SelectList(_dbContext.Trips, "Id", "Id", stop.TripId);
             return View(stop);
@@ -76,7 +74,6 @@ namespace InterCityBus_MK.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Reload dropdowns if validation fails
             ViewData["StationId"] = new SelectList(_dbContext.Stations, "Id", "Name", stop.StationId);
             ViewData["TripId"] = new SelectList(_dbContext.Trips, "Id", "Id", stop.TripId);
             return View(stop);
@@ -84,7 +81,6 @@ namespace InterCityBus_MK.Controllers
 
         public async Task<ActionResult> Delete(int id)
         {
-            // Include related data to show details on the Delete confirmation page
             var stop = await _dbContext.Stops
                 .Include(s => s.Station)
                 .Include(s => s.Trip)

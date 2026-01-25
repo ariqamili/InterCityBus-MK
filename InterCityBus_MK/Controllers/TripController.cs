@@ -1,5 +1,6 @@
 ﻿using InterCityBus_MK.Data;
 using InterCityBus_MK.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,8 @@ namespace InterCityBus_MK.Controllers
         {
             _dbContext = dbContext;
         }
+
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(CancellationToken ct)
         {
             var tripViewModels = await _dbContext.Trips
@@ -29,6 +32,7 @@ namespace InterCityBus_MK.Controllers
             return View(tripViewModels);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             var viewModel = new TripFormViewModel {};
@@ -38,6 +42,7 @@ namespace InterCityBus_MK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(TripFormViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -60,6 +65,7 @@ namespace InterCityBus_MK.Controllers
         }
 
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id)
         {
             var trip = await _dbContext.Trips.FindAsync(id);
@@ -83,6 +89,7 @@ namespace InterCityBus_MK.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(TripFormViewModel viewModel)
         {
             if (ModelState.IsValid)
@@ -140,6 +147,7 @@ namespace InterCityBus_MK.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             var trip = await _dbContext.Trips.FindAsync(id);
@@ -150,11 +158,12 @@ namespace InterCityBus_MK.Controllers
             return View(trip);
         }
 
-        [HttpPost]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(TripFormViewModel viewModel)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var trip = await _dbContext.Trips.FindAsync(viewModel.Id);
+            var trip = await _dbContext.Trips.FindAsync(id);
             if (trip == null)
             {
                 return NotFound();

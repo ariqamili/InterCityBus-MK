@@ -1,359 +1,462 @@
 ﻿@model InterCityBus_MK.ViewModels.TripSearchViewModel
 
-@{
-    ViewData["Title"] = "Find Your Bus - InterCity MK";
-}
-
-<!-- Hero Search Section -->
 <div class="hero-section">
-    <div class="container">
-        <div class="text-center mb-4">
-            <h1 class="display-4 fw-bold text-white mb-3">
-                Travel Across North Macedonia
-            </h1>
-            <p class="lead text-white-50">
-                Affordable and comfortable bus travel to your destination
-            </p>
-        </div>
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold text-white mb-2">Travel Across North Macedonia</h1>
+        <p class="text-white-50 lead mb-5">Affordable and comfortable bus travel to your destination</p>
 
-        <!-- Search Form Card -->
         <div class="search-card">
-            <form asp-action="Index" method="post">
-                <div class="row g-3">
-                    <!-- From Station -->
-                    <div class="col-md-5">
-                        <label asp-for="FromStationId" class="form-label fw-semibold">
-                            <i class="bi bi-geo-alt-fill text-primary me-2"></i>From
-                        </label>
-                        <select asp-for="FromStationId" class="form-select form-select-lg">
-                            <option value="">Select departure station</option>
-                            @foreach (var cityGroup in Model.Stations.GroupBy(s => s.City).OrderBy(g => g.Key))
-                            {
-                                <optgroup label="@cityGroup.Key">
-                                    @foreach (var station in cityGroup.OrderBy(s => s.Name))
-                                    {
-                                        <option value="@station.Id">@station.Name</option>
-                                    }
-                                </optgroup>
-                            }
-                        </select>
-                        <span asp-validation-for="FromStationId" class="text-danger small"></span>
+            <form asp-action="Index" method="post" id="searchForm" class="position-relative">
+                <button type="button" class="swap-btn-absolute" id="swapStations"><i class="bi bi-arrow-left-right"></i></button>
+
+                <div class="row g-4 align-items-end">
+                    <div class="col-md-6 pe-md-5 text-start">
+                        <label class="field-label">FROM</label>
+                        <div class="input-wrapper">
+                            <i class="bi bi-geo-alt-fill icon-left"></i>
+                            <select asp-for="FromStationId" class="modern-input" id="FromStationId">
+                                <option value="" disabled selected>Select departure</option>
+                                @foreach (var group in Model.Stations.OrderBy(s => s.Id).GroupBy(s => s.City))
+                                {
+                                    <optgroup label="@group.Key">
+                                        @foreach (var s in group.OrderBy(s => s.Id))
+                                        {
+                                            <option value="@s.Id">@s.Name</option>
+                                        }
+                                    </optgroup>
+                                }
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- Swap Button -->
-                    <div class="col-md-2 d-flex align-items-end justify-content-center">
-                        <button type="button" class="btn btn-outline-secondary mb-4" id="swapStations" title="Swap stations">
-                            <i class="bi bi-arrow-left-right"></i>
-                        </button>
+                    <div class="col-md-6 ps-md-5 text-start">
+                        <label class="field-label">TO</label>
+                        <div class="input-wrapper">
+                            <i class="bi bi-pin-map-fill icon-left"></i>
+                            <select asp-for="ToStationId" class="modern-input" id="ToStationId">
+                                <option value="" disabled selected>Select destination</option>
+                                @foreach (var group in Model.Stations.OrderBy(s => s.Id).GroupBy(s => s.City))
+                                {
+                                    <optgroup label="@group.Key">
+                                        @foreach (var s in group.OrderBy(s => s.Id))
+                                        {
+                                            <option value="@s.Id">@s.Name</option>
+                                        }
+                                    </optgroup>
+                                }
+                            </select>
+                        </div>
                     </div>
 
-                    <!-- To Station -->
-                    <div class="col-md-5">
-                        <label asp-for="ToStationId" class="form-label fw-semibold">
-                            <i class="bi bi-pin-map-fill text-primary me-2"></i>To
-                        </label>
-                        <select asp-for="ToStationId" class="form-select form-select-lg">
-                            <option value="">Select destination station</option>
-                            @foreach (var cityGroup in Model.Stations.GroupBy(s => s.City).OrderBy(g => g.Key))
-                            {
-                                <optgroup label="@cityGroup.Key">
-                                    @foreach (var station in cityGroup.OrderBy(s => s.Name))
-                                    {
-                                        <option value="@station.Id">@station.Name</option>
-                                    }
-                                </optgroup>
-                            }
-                        </select>
-                        <span asp-validation-for="ToStationId" class="text-danger small"></span>
+                    <div class="col-md-6 pe-md-5 d-flex justify-content-end text-start">
+                        <div style="width: 85%;">
+                            <label class="field-label">DATE</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-calendar-event icon-left"></i>
+                                <input type="text" asp-for="TravelDate" id="flatpickr-date" class="modern-input" placeholder="Select Date" readonly />
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Search Button -->
-                    <div class="col-12 text-center mt-4">
-                        <button type="submit" class="btn btn-primary btn-lg px-5 py-3">
+                    <div class="col-md-6 ps-md-5 d-flex justify-content-start">
+                        <button type="submit" class="search-btn-modern" style="width: 85%;">
                             <i class="bi bi-search me-2"></i>Search Trips
                         </button>
                     </div>
                 </div>
-
-                <!-- Display validation summary if needed -->
-                <div asp-validation-summary="ModelOnly" class="text-danger text-center mt-3"></div>
             </form>
+            <div id="validation-error" class="validation-toast" style="display:none;">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i> Departure and destination cannot be the same.
+            </div>
+        </div>
+
+    </div>
+    <div class="container my-5">
+        @if (Model.HasSearched)
+        {
+            <div class="d-flex align-items-center mb-4">
+                <div class="flex-grow-1 h-px bg-light me-3"></div>
+                <h3 class="fw-bold text-dark mb-0">Available Trips</h3>
+                <div class="flex-grow-1 h-px bg-light ms-3"></div>
+            </div>
+
+            @if (Model.Results != null && Model.Results.Any())
+            {
+                <div class="row g-4">
+                    @foreach (var trip in Model.Results)
+                    {
+                        <div class="col-12">
+                            <div class="card trip-result-card border-0 shadow-sm p-4 overflow-hidden">
+                                <div class="row align-items-center">
+                                    <div class="col-md-3">
+                                        <div class="d-flex align-items-center mb-2">
+                                            <div class="company-logo-placeholder me-2">
+                                                <i class="bi bi-bus-front text-white"></i>
+                                            </div>
+                                            <h5 class="mb-0 fw-bold text-dark">@trip.CompanyName</h5>
+                                        </div>
+                                        <span class="badge rounded-pill bg-purple-soft text-purple px-3">Express</span>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="d-flex align-items-center justify-content-between route-timeline">
+                                            <div class="text-center">
+                                                <div class="h4 mb-0 fw-800 text-dark">@trip.DepartureTime.ToString("HH:mm")</div>
+                                                <div class="station-label text-muted">@trip.FromStationName</div>
+                                            </div>
+
+                                            <div class="flex-grow-1 mx-4 position-relative">
+                                                <div class="timeline-line"></div>
+                                                <div class="timeline-bus">
+                                                    <i class="bi bi-bus-front-fill"></i>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-center">
+                                                <div class="h4 mb-0 fw-800 text-dark">@trip.ArrivalTime.ToString("HH:mm")</div>
+                                                <div class="station-label text-muted">@trip.ToStationName</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3 text-end border-start-dashed">
+                                        <div class="price-container">
+                                            <small class="text-muted d-block mb-1">Total Price</small>
+                                            <div class="h3 mb-0 fw-800 text-purple-gradient">@trip.Price.ToString("N0") <small class="h6">MKD</small></div>
+                                        </div>
+                                        <a asp-controller="Trip" asp-action="Details" asp-route-id="@trip.Id"
+                                           class="btn search-btn-modern mt-3 w-100 py-2 d-flex align-items-center justify-content-center">
+                                            Details <i class="bi bi-arrow-right ms-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5 no-results-card shadow-sm">
+                    <div class="feature-icon-wrapper mb-4">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <h4 class="fw-bold text-dark">No trips found</h4>
+                    <p class="text-muted">We couldn't find any trips for this route on @(DateTime.Now.ToString("MMM dd")).</p>
+                    <button class="btn btn-outline-purple rounded-pill px-4 mt-2" onclick="window.scrollTo(0,0)">Modify Search</button>
+                </div>
+            }
+        }
+    </div>
+</div>
+
+<div class="container py-5 mt-5">
+    <div class="row g-5 text-center">
+        <div class="col-md-4">
+            <div class="feature-icon-wrapper"><i class="bi bi-lightning-charge-fill"></i></div>
+            <h5 class="fw-bold mt-4">Fast Booking</h5>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-icon-wrapper"><i class="bi bi-shield-check"></i></div>
+            <h5 class="fw-bold mt-4">Reliable Service</h5>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-icon-wrapper"><i class="bi bi-wallet2"></i></div>
+            <h5 class="fw-bold mt-4">Best Prices</h5>
         </div>
     </div>
 </div>
 
-<!-- Results Section -->
-@if (Model.HasSearched)
-{
-    <div class="container my-5">
-        <!-- Search Summary -->
-        <div class="search-summary mb-4 p-4 bg-light rounded-3 shadow-sm">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    @{
-                        var fromStation = Model.Stations.FirstOrDefault(s => s.Id == Model.FromStationId);
-                        var toStation = Model.Stations.FirstOrDefault(s => s.Id == Model.ToStationId);
-                    }
-                    <h4 class="mb-2">
-                        <i class="bi bi-bus-front text-primary"></i>
-                        <strong>@fromStation?.Name</strong>
-                        <i class="bi bi-arrow-right mx-2 text-muted"></i>
-                        <strong>@toStation?.Name</strong>
-                    </h4>
-                    <p class="text-muted mb-0">
-                        <small>
-                            <i class="bi bi-geo"></i> @fromStation?.City
-                            <i class="bi bi-arrow-right mx-2"></i>
-                            <i class="bi bi-geo"></i> @toStation?.City
-                        </small>
-                    </p>
-                </div>
-                <div class="col-md-4 text-end">
-                    <span class="badge bg-primary fs-6">
-                        @Model.Results.Count @(Model.Results.Count == 1 ? "trip" : "trips") found
-                    </span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Trip Results -->
-        @if (Model.Results.Any())
-        {
-            <div class="results-container">
-                @foreach (var trip in Model.Results)
-                {
-                    <div class="card trip-card mb-3 shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="row align-items-center">
-                                <!-- Company Name -->
-                                <div class="col-md-2 text-center mb-3 mb-md-0">
-                                    <div class="company-badge">
-                                        <i class="bi bi-bus-front-fill text-primary display-6"></i>
-                                        <h6 class="text-primary fw-bold mt-2 mb-0">@trip.CompanyName</h6>
-                                    </div>
-                                </div>
-
-                                <!-- Route & Time -->
-                                <div class="col-md-7 mb-3 mb-md-0">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <!-- Departure -->
-                                        <div class="text-center">
-                                            <div class="h3 mb-1 fw-bold">@trip.DepartureTime.ToString("HH:mm")</div>
-                                            <small class="text-muted">@trip.FromStationName</small>
-                                        </div>
-
-                                        <!-- Journey Duration -->
-                                        <div class="flex-grow-1 mx-3 position-relative">
-                                            <hr class="my-0 border-2" style="border-top: 2px dashed #dee2e6;">
-                                            @{
-                                                var duration = trip.ArrivalTime.ToTimeSpan() - trip.DepartureTime.ToTimeSpan();
-                                                @if (duration < TimeSpan.Zero)
-                                                {
-                                                    duration = duration.Add(TimeSpan.FromHours(24));
-                                                }
-                                                var hours = (int)duration.TotalHours;
-                                                var minutes = duration.Minutes;
-                                            }
-                                            <div class="position-absolute top-50 start-50 translate-middle bg-white px-2">
-                                                <i class="bi bi-clock text-primary"></i>
-                                                <small class="text-muted">@hours h @minutes min</small>
-                                            </div>
-                                        </div>
-
-                                        <!-- Arrival -->
-                                        <div class="text-center">
-                                            <div class="h3 mb-1 fw-bold">@trip.ArrivalTime.ToString("HH:mm")</div>
-                                            <small class="text-muted">@trip.ToStationName</small>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Price & Action -->
-                                <div class="col-md-3 text-center">
-                                    <div class="h2 text-primary mb-2 fw-bold">
-                                        @trip.Price.ToString("N0") <small class="fs-6 text-muted">MKD</small>
-                                    </div>
-                                    <small class="text-muted d-block mb-3">per passenger</small>
-                                    <a asp-controller="Trip" asp-action="Details" asp-route-id="@trip.Id" class="btn btn-primary w-100 py-2">
-                                        View Details <i class="bi bi-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
-            </div>
-        }
-        else
-        {
-            <!-- No Results Found -->
-            <div class="alert alert-warning text-center py-5 shadow-sm">
-                <i class="bi bi-exclamation-triangle display-1 text-warning mb-3"></i>
-                <h4 class="mb-3">No trips found</h4>
-                <p class="text-muted mb-4">
-                    We couldn't find any trips from <strong>@fromStation?.Name</strong>
-                    to <strong>@toStation?.Name</strong>.
-                </p>
-                <p class="text-muted">
-                    <i class="bi bi-lightbulb"></i> Try searching for a different route or check back later.
-                </p>
-            </div>
-        }
-    </div>
-}
-
-<!-- Features Section (only show when no search has been performed) -->
-@if (!Model.HasSearched)
-{
-    <div class="container my-5">
-        <div class="row text-center g-4">
-            <div class="col-md-4">
-                <div class="feature-card p-4">
-                    <i class="bi bi-lightning-charge-fill text-primary display-4 mb-3"></i>
-                    <h5 class="fw-bold">Fast Booking</h5>
-                    <p class="text-muted">Search and compare trips in seconds</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-card p-4">
-                    <i class="bi bi-piggy-bank-fill text-primary display-4 mb-3"></i>
-                    <h5 class="fw-bold">Best Prices</h5>
-                    <p class="text-muted">Compare prices from all bus companies</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="feature-card p-4">
-                    <i class="bi bi-shield-check text-primary display-4 mb-3"></i>
-                    <h5 class="fw-bold">Reliable Service</h5>
-                    <p class="text-muted">Trusted companies and verified schedules</p>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-
     <script>
-        // Swap stations functionality
-        document.getElementById('swapStations').addEventListener('click', function() {
-            const fromSelect = document.getElementById('FromStationId');
-            const toSelect = document.getElementById('ToStationId');
+        document.addEventListener("DOMContentLoaded", function () {
+            flatpickr("#flatpickr-date", { dateFormat: "D, M j", minDate: "today", position: "below center" });
 
-            const temp = fromSelect.value;
-            fromSelect.value = toSelect.value;
-            toSelect.value = temp;
+            const fromS = document.getElementById('FromStationId'), toS = document.getElementById('ToStationId');
+            const err = document.getElementById('validation-error');
+
+            function validate() { err.style.display = (fromS.value && toS.value && fromS.value === toS.value) ? 'block' : 'none'; }
+
+            fromS.addEventListener('change', validate);
+            toS.addEventListener('change', validate);
+
+            document.getElementById('swapStations').addEventListener('click', function() {
+                const temp = fromS.value; fromS.value = toS.value; toS.value = temp;
+                validate();
+                let currentRot = parseInt(this.dataset.rot || 0) + 180;
+                this.style.transform = `translate(-50%, -50%) rotate(${currentRot}deg)`;
+                this.dataset.rot = currentRot;
+            });
         });
     </script>
 }
 
 @section Styles {
     <style>
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 50vh;
-            padding: 60px 0 80px 0;
-            margin-bottom: 40px;
+        /* --- COLOR VARIABLES --- */
+        :root {
+            --purple-main: #667eea;
+            --purple-dark: #764ba2;
+            --purple-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --purple-soft: rgba(102, 126, 234, 0.1);
+            --bg-light: #f8f9fa;
+            --text-dark: #2d3436;
         }
 
-        /* Search Card */
+        /* --- HERO & SEARCH SECTION --- */
+        .hero-section {
+            background: var(--purple-gradient);
+            padding: 100px 0 140px 0;
+        }
+
         .search-card {
             background: white;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 1000px;
+            border-radius: 32px;
+            padding: 60px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.18);
+            max-width: 1050px;
             margin: 0 auto;
         }
 
-        .form-select-lg, .form-control-lg {
-            border-radius: 8px;
-            border: 2px solid #e9ecef;
+        .field-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #bbb;
+            letter-spacing: 1.2px;
+            margin-bottom: 10px;
+            display: block;
         }
 
-        .form-select-lg:focus, .form-control-lg:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            border: 2px solid #f3f3f3;
+            border-radius: 18px;
+            background: #fdfdfd;
+            transition: border-color 0.3s ease;
         }
 
-        /* Buttons */
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            .input-wrapper:focus-within {
+                border-color: var(--purple-main);
+            }
+
+        .icon-left {
+            position: absolute;
+            left: 20px;
+            color: var(--purple-main);
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        .modern-input {
+            width: 100%;
+            height: 64px;
             border: none;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            background: transparent;
+            padding: 0 45px 0 58px; 
+            font-weight: 600;
+            outline: none;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        select.modern-input {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23667eea' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 20px) center;
+            background-size: 12px;
         }
 
-        #swapStations {
-            border-radius: 50%;
+        .swap-btn-absolute {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
             width: 48px;
             height: 48px;
-            padding: 0;
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 50%;
+            color: var(--purple-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55), box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+            .swap-btn-absolute:hover {
+                background-color: #fcfcfc;
+                color: var(--purple-dark);
+                box-shadow: 0 8px 15px rgba(102, 126, 234, 0.25);
+                width: 52px;
+                height: 52px;
+            }
+
+        .search-btn-modern {
+            height: 64px;
+            background: var(--purple-gradient);
+            border: none;
+            border-radius: 18px;
+            color: white;
+            font-weight: 700;
+            width: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+            .search-btn-modern:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(118, 75, 162, 0.3);
+            }
+
+        /* --- TRIP RESULTS SECTION --- */
+        .trip-result-card {
+            background: white;
+            border-radius: 24px;
             transition: all 0.3s ease;
+            position: relative;
         }
 
-        #swapStations:hover {
-            transform: rotate(180deg);
-            background-color: #f8f9fa;
+            .trip-result-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 35px rgba(118, 75, 162, 0.12) !important;
+            }
+
+        .fw-800 {
+            font-weight: 800;
         }
 
-        /* Trip Cards */
-        .trip-card {
-            border: 1px solid #e9ecef;
+        .text-purple-gradient {
+            background: var(--purple-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .bg-purple-soft {
+            background-color: var(--purple-soft);
+            color: var(--purple-dark);
+            font-weight: 700;
+        }
+
+        .company-logo-placeholder {
+            width: 36px;
+            height: 36px;
+            background: var(--purple-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.2);
+        }
+
+        .route-timeline {
+            position: relative;
+        }
+
+        .timeline-line {
+            height: 2px;
+            background: #ececec;
+            width: 100%;
+        }
+
+        .timeline-bus {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 0 12px;
+            color: var(--purple-main);
+            font-size: 1.3rem;
+        }
+
+        .station-label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 6px;
+            color: #6c757d;
+        }
+
+        .border-start-dashed {
+            border-left: 2px dashed #f0f0f0;
+            padding-left: 30px;
+        }
+
+        .no-results-card {
+            background: white;
+            border-radius: 32px;
+            padding: 80px 20px;
+        }
+
+        .feature-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            background: var(--purple-gradient);
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .btn-outline-purple {
+            border: 2px solid var(--purple-main);
+            color: var(--purple-main);
+            font-weight: 700;
             border-radius: 12px;
-            transition: all 0.3s ease;
+            padding: 10px 25px;
+            transition: all 0.3s;
         }
 
-        .trip-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0,0,0,0.15) !important;
-            border-color: #667eea;
+            .btn-outline-purple:hover {
+                background: var(--purple-main);
+                color: white;
+            }
+
+        .flatpickr-calendar {
+            background: #1a1a2e !important;
+            border-radius: 24px !important;
+            color: white !important;
+            border: none !important;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4) !important;
         }
 
-        .company-badge {
-            padding: 10px;
+        .flatpickr-day.selected {
+            background: var(--purple-gradient) !important;
+            border: none !important;
         }
 
-        /* Search Summary */
-        .search-summary {
-            border-left: 4px solid #667eea;
+        .flatpickr-day {
+            color: white !important;
         }
 
-        /* Features */
-        .feature-card {
-            transition: all 0.3s ease;
-            border-radius: 12px;
+        .flatpickr-months .flatpickr-month,
+        .flatpickr-current-month .flatpickr-monthDropdown-months,
+        .flatpickr-current-month input.cur-year,
+        .flatpickr-weekday {
+            color: white !important;
         }
 
-        .feature-card:hover {
-            background-color: #f8f9fa;
-            transform: translateY(-4px);
-        }
-
-        /* Responsive */
-        /* media (max-width: 768px) {
-            .hero-section {
-                padding: 40px 0 60px 0;
+        @@media (max-width: 768px) {
+            .border-start-dashed {
+                border-left: none;
+                border-top: 2px dashed #f0f0f0;
+                margin-top: 25px;
+                padding-top: 25px;
+                padding-left: 0;
+                text-align: center !important;
             }
 
             .search-card {
-                padding: 24px;
+                padding: 30px;
             }
-
-            .display-4 {
-                font-size: 2rem;
-            }
-
-            #swapStations {
-                margin-bottom: 0 !important;
-            }
-        } */
+        }
     </style>
 }

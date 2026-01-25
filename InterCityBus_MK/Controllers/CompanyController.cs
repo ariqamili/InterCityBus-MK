@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace InterCityBus_MK.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class CompanyController : Controller
     {
         private ApplicationDbContext _dbContext;
@@ -58,6 +58,16 @@ namespace InterCityBus_MK.Controllers
                 _dbContext.Companies.Update(company);
                 await _dbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
+            return View(company);
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            var company = await _dbContext.Companies.FindAsync(id);
+            if (company == null)
+            {
+                return NotFound();
             }
             return View(company);
         }
