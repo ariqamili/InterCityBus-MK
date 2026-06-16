@@ -3,17 +3,6 @@
 📝 Project Description
 A modern, full-stack web application built with ASP.NET Core for searching and managing inter-city bus trips across North Macedonia. The platform features a responsive design, role-based authentication, and a streamlined booking interface.
 
-📂 Submission Folder Structure
-This zip file contains the following directories as per the project requirements:
-
-code/: Contains the full source code, solution files, and local database configuration.
-
-slides/: PowerPoint presentation for the final project talk.
-
-video/: A screen recording demonstrating the application's features and responsive UI.
-
-paper/: Detailed documentation describing the project's architecture, tools, and implementation.
-
 🛠️ Key Features
 Dynamic Trip Search: Filter by departure station, destination, and date with a modern, intuitive UI.
 
