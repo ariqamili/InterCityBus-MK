@@ -1,0 +1,261 @@
+﻿@model InterCityBus_MK.ViewModels.AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container py-5 min-vh-100">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mb-5">
+        <div>
+            <h2 class="fw-800 text-dark mb-1">
+                <i class="bi bi-grid-1x2-fill text-primary me-2"></i>Management Dashboard
+            </h2>
+            <p class="text-muted mb-0">Welcome back! Here's an overview of your bus network.</p>
+        </div>
+        <span class="badge rounded-pill shadow-sm px-4 py-3 bg-white text-primary border fw-bold">
+            <i class="bi bi-shield-lock-fill me-2"></i> System Administrator
+        </span>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm rounded-32 h-100 b-top-blue">
+                <div class="card-body text-center p-4">
+                    <div class="icon-box-blue mb-3">
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <h6 class="field-label-stats">Stations</h6>
+                    <h2 class="display-5 fw-800 text-dark mb-3">@Model.TotalStations</h2>
+                    <a asp-controller="Station" asp-action="Index" class="btn btn-blue-soft w-100 rounded-pill stretched-link">
+                        Manage Stations
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm rounded-32 h-100 b-top-green">
+                <div class="card-body text-center p-4">
+                    <div class="icon-box-green mb-3">
+                        <i class="bi bi-building-fill"></i>
+                    </div>
+                    <h6 class="field-label-stats">Companies</h6>
+                    <h2 class="display-5 fw-800 text-dark mb-3">@Model.TotalCompanies</h2>
+                    <a asp-controller="Company" asp-action="Index" class="btn btn-green-soft w-100 rounded-pill stretched-link">
+                        Manage Companies
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm rounded-32 h-100 b-top-yellow">
+                <div class="card-body text-center p-4">
+                    <div class="icon-box-yellow mb-3">
+                        <i class="bi bi-bus-front-fill"></i>
+                    </div>
+                    <h6 class="field-label-stats">Active Trips</h6>
+                    <h2 class="display-5 fw-800 text-dark mb-3">@Model.TotalTrips</h2>
+                    <a asp-controller="Trip" asp-action="Index" class="btn btn-yellow-soft w-100 rounded-pill stretched-link">
+                        Manage Trips
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-3">
+            <div class="card stat-card border-0 shadow-sm rounded-32 h-100 b-top-red">
+                <div class="card-body text-center p-4">
+                    <div class="icon-box-red mb-3">
+                        <i class="bi bi-signpost-split-fill"></i>
+                    </div>
+                    <h6 class="field-label-stats">Route Stops</h6>
+                    <h2 class="display-5 fw-800 text-dark mb-3">@Model.TotalStops</h2>
+                    <a asp-controller="Stops" asp-action="Index" class="btn btn-red-soft w-100 rounded-pill stretched-link">
+                        Manage Stops
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-32 p-4">
+        <div class="card-header bg-white border-0 pb-3">
+            <h5 class="fw-800 mb-0">
+                <i class="bi bi-lightning-charge-fill text-warning me-2"></i>Quick Actions
+            </h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <a asp-controller="Station" asp-action="Create" class="btn action-btn-outline b-blue w-100 py-4">
+                        <i class="bi bi-plus-circle mb-2"></i>
+                        <span>Add Station</span>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a asp-controller="Company" asp-action="Create" class="btn action-btn-outline b-green w-100 py-4">
+                        <i class="bi bi-building-add mb-2"></i>
+                        <span>Add Company</span>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a asp-controller="Trip" asp-action="Create" class="btn action-btn-outline b-yellow w-100 py-4">
+                        <i class="bi bi-map mb-2"></i>
+                        <span>Add New Trip</span>
+                    </a>
+                </div>
+                <div class="col-md-3">
+                    <a asp-controller="Stops" asp-action="Create" class="btn action-btn-outline b-red w-100 py-4">
+                        <i class="bi bi-signpost-2 mb-2"></i>
+                        <span>Add Stop</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .fw-800 {
+            font-weight: 800;
+        }
+
+        .rounded-32 {
+            border-radius: 32px !important;
+        }
+
+        /* Stats Card Logic */
+        .stat-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+
+            .stat-card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important;
+            }
+
+        /* Top Accent Borders */
+        .b-top-blue {
+            border-top: 5px solid #0d6efd !important;
+        }
+
+        .b-top-green {
+            border-top: 5px solid #198754 !important;
+        }
+
+        .b-top-yellow {
+            border-top: 5px solid #ffc107 !important;
+        }
+
+        .b-top-red {
+            border-top: 5px solid #dc3545 !important;
+        }
+
+        /* Icon Box Styling */
+        [class^="icon-box-"] {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .icon-box-blue {
+            background: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+        }
+
+        .icon-box-green {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+
+        .icon-box-yellow {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .icon-box-red {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .field-label-stats {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: #bbb;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+
+        /* Buttons Soft Themed */
+        .btn-blue-soft {
+            background: #0d6efd;
+            color: white;
+            font-weight: 700;
+        }
+
+        .btn-green-soft {
+            background: #198754;
+            color: white;
+            font-weight: 700;
+        }
+
+        .btn-yellow-soft {
+            background: #ffc107;
+            color: #000;
+            font-weight: 700;
+        }
+
+        .btn-red-soft {
+            background: #dc3545;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Quick Action Buttons */
+        .action-btn-outline {
+            border: 2px solid #f3f3f3;
+            border-radius: 18px;
+            background: #fdfdfd;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 700;
+            transition: all 0.2s ease;
+        }
+
+            .action-btn-outline i {
+                font-size: 1.8rem;
+            }
+
+        .b-blue:hover {
+            border-color: #0d6efd;
+            color: #0d6efd;
+            background: rgba(13, 110, 253, 0.05);
+        }
+
+        .b-green:hover {
+            border-color: #198754;
+            color: #198754;
+            background: rgba(25, 135, 84, 0.05);
+        }
+
+        .b-yellow:hover {
+            border-color: #ffc107;
+            color: #ffc107;
+            background: rgba(255, 193, 7, 0.05);
+        }
+
+        .b-red:hover {
+            border-color: #dc3545;
+            color: #dc3545;
+            background: rgba(220, 53, 69, 0.05);
+        }
+    </style>
+}

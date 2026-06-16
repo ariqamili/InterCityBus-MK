@@ -1,0 +1,55 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="container py-5 mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-lg rounded-32 p-4">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="feature-icon-wrapper mb-3 bg-purple-gradient">
+                            <i class="bi bi-person-plus-fill text-white fs-2"></i>
+                        </div>
+                        <h2 class="fw-800 text-dark">Join Us</h2>
+                        <span class="badge rounded-pill bg-soft-purple text-primary px-3 py-2 mb-3">
+                            <i class="bi bi-person-badge me-1"></i> Traveler Account
+                        </span>
+                        <p class="text-muted">Create an account to book and manage trips.</p>
+                    </div>
+
+                    <form asp-action="Register" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="mb-3">
+                            <label class="field-label-mini">EMAIL ADDRESS</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-envelope icon-left"></i>
+                                <input name="email" type="email" class="modern-input" placeholder="traveler@example.com" required />
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="field-label-mini">PASSWORD</label>
+                            <div class="input-wrapper">
+                                <i class="bi bi-shield-lock icon-left"></i>
+                                <input name="password" type="password" class="modern-input" placeholder="Min. 6 characters" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-purple-gradient w-100 py-3 rounded-16 fw-bold text-white shadow-sm mb-3">
+                            Create Account
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p class="text-muted small">
+                            Already have an account?
+                            <a asp-action="Login" class="text-primary fw-bold text-decoration-none">Log in here</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

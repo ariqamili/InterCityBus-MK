@@ -1,0 +1,28 @@
+# Visual Studio
+.vs/
+.VS/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# Logs
+*.log
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Environment variables (if used)
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Publish output
+publish/
+
+# Node (only if frontend tools used later)
+node_modules/
